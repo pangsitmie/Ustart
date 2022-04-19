@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_notification"
+            android:title="Notification"/>
+        <item
+            android:id="@+id/nav_purchase"
+            android:icon="@drawable/ic_purchase"
+            android:title="My Purchase" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting"
+            android:title="Settings" />
+    </group>
+
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/my_id">
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share"
+            android:title="Share" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+    </group>
+    <item
+        android:id="@+id/action_drawer_cart"
+        android:orderInCategory="200"
+        android:title="Cart"
+        android:icon="@drawable/ic_shopping_cart_white_24dp"
+        app:showAsAction="ifRoom"/>
+
+
+
+</menu>

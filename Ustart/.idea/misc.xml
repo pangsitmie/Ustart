@@ -5,12 +5,16 @@
       <map>
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/ic_mail.xml" value="0.2985" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/ic_password.xml" value="0.2985" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/ic_person.xml" value="0.1495" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/ic_share.xml" value="0.1495" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/round_button.xml" value="0.2985" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/drawable/round_square_button.xml" value="0.25" />
-        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_sing_in.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_welcome.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/menu/bottom_navigation.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/menu/main_menu.xml" value="0.5" />
       </map>
     </option>
   </component>

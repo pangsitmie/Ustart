@@ -13,7 +13,24 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/purple</item>
         <!-- Customize your theme here. -->
 
-<!--        font    -->
+        <!-- font    -->
         <item name="android:fontFamily">@font/montserrat_regular</item>
+
+        <!-- styles.xml -->
+
+    </style>
+
+
+    <!-- styles.xml -->
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <!--ANIMATIONS-->
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name ="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name ="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name ="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name ="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 </resources>
