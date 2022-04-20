@@ -21,6 +21,14 @@ public class WelcomeActivity extends AppCompatActivity {
         shopBtn = findViewById(R.id.shopBtn);
         signInBtn = findViewById(R.id.signInTV);
 
+        shopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
