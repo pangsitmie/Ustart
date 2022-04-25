@@ -7,9 +7,9 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/nav_search"
+        android:id="@+id/nav_explore"
         android:icon="@drawable/ic_search"
-        android:title="Search" />
+        android:title="Explore" />
 
     <item
         android:id="@+id/nav_orders"
@@ -25,7 +25,4 @@
         android:id="@+id/nav_wallet"
         android:icon="@drawable/ic_wallet"
         android:title="Wallet" />
-
-
-
 </menu>

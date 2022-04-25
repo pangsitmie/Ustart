@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg">
+
+    <TextView
+        android:id="@+id/chooseTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Buy Now"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/row1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chooseTV">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@+id/img"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toRightOf="@+id/img"
+            android:lines="2"
+            android:text="Desc"
+            android:textColor="@color/white_grey"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/originalPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/img"
+            android:text="Original"
+            android:textColor="@color/white_grey"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/currentPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/desc"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/originalPrice"
+            android:text="Current"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/row2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row1"
+        android:padding="20dp">
+
+        <Button
+            android:id="@+id/btnMinTransaction"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round_square_button"
+            android:layout_toLeftOf="@+id/amount"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/blue"
+            android:paddingBottom="3dp"
+            android:text="-"
+            android:textColor="@color/card_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="20"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnAddTransaction"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/round_square_button"
+            android:layout_toRightOf="@+id/amount"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="@color/blue"
+            android:paddingBottom="3dp"
+            android:text="+"
+            android:textColor="@color/card_color"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row2"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round_button"
+        android:backgroundTint="@color/black"
+        android:minHeight="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="Add To Cart"
+        android:textColor="@color/card_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ustart.views.ExploreFragment;
+import com.example.ustart.views.HomeFragment;
+import com.example.ustart.views.MarketFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -24,9 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private NavigationView navigationView;
-
     private ImageView toolbarIcon;
     private TextView toolbarTitle;
+
+//    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
+
+//        navController = Navigation.findNavController(this, R.id.nav_view);
 
         toolbarIcon = toolbar.findViewById(R.id.toolbarIcon);
         toolbarTitle = toolbar.findViewById(R.id.toolbarTitle);
@@ -127,27 +133,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     switch (item.getItemId()){
                         case R.id.nav_home:
-                            /*selectedFragment = new StocksFragment();*/
-                            Toast.makeText(getApplicationContext(), "Stay tune for the next update", Toast.LENGTH_SHORT).show();
+                            selectedFragment = new HomeFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
-                        case R.id.nav_search:
-//                            selectedFragment = new CryptoFragment();
-//                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        case R.id.nav_explore:
+                            selectedFragment = new ExploreFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_orders:
                             /*selectedFragment = new StocksFragment();*/
                             Toast.makeText(getApplicationContext(), "Stay tune for the next update", Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.nav_store:
-                            /*selectedFragment = new StocksFragment();*/
-                            Toast.makeText(getApplicationContext(), "Stay tune for the next update", Toast.LENGTH_SHORT).show();
+                            selectedFragment = new MarketFragment();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_wallet:
                             /*selectedFragment = new StocksFragment();*/
                             Toast.makeText(getApplicationContext(), "Stay tune for the next update", Toast.LENGTH_SHORT).show();
                             break;
                     }
-                    /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();*/
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                     return true;
                 }
 
