@@ -50,4 +50,9 @@
     <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="srcCompat">@drawable/ic_person</item>
     </style>
+
+    <style name="Shape" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
+
 </resources>
