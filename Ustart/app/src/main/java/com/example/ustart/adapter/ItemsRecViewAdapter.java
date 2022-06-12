@@ -1,4 +1,4 @@
-package com.example.ustart;
+package com.example.ustart.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,15 +19,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ustart.Items;
+import com.example.ustart.R;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapter.ViewHolder> {
 

@@ -19,8 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_marginTop="-20dp"
-            android:background="@drawable/round_button"
-            android:backgroundTint="@color/purple"
             android:elevation="4dp"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
@@ -34,19 +32,19 @@
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_person" />
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="@color/purple"/>
 
                 <TextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/toolbarIcon"
-                    android:layout_marginLeft="15dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_toRightOf="@+id/toolbarIcon"
-                    android:text="Customer"
-                    android:textColor="@color/white"
+                    android:text="Food Rescue"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/purple"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -58,7 +56,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginBottom="25dp"
                     android:layout_marginRight="30dp"
-                    android:src="@drawable/shopping_bag" />
+                    android:src="@drawable/shopping_bag"
+                    app:tint="@color/purple"/>
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 

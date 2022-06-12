@@ -1,4 +1,4 @@
-package com.example.ustart;
+package com.example.ustart.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ustart.Markets;
+import com.example.ustart.R;
 
 import java.util.ArrayList;
 

@@ -15,13 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ustart.Items;
-import com.example.ustart.ItemsRecViewAdapter;
+import com.example.ustart.adapter.ItemsRecViewAdapter;
 import com.example.ustart.R;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ExploreFragment extends Fragment {
     private RecyclerView recView;

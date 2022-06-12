@@ -11,9 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ustart.R;
+import com.example.ustart.adapter.SwipeAdapter;
+import com.yalantis.library.Koloda;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
+    private SwipeAdapter adapter;
+    private List<Integer> list;
+    Koloda koloda;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,5 +38,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        koloda = view.findViewById(R.id.koloda);
+
+        list = new ArrayList<>();
+        adapter = new SwipeAdapter(getActivity(), list);
+        koloda.setAdapter(adapter);
     }
 }
