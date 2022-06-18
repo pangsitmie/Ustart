@@ -1,0 +1,166 @@
+c:\Users\Yi Yi\source\repos\project\project\bin\project.dll.config
+c:\Users\Yi Yi\source\repos\project\project\bin\project.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\project.pdb
+c:\Users\Yi Yi\source\repos\project\project\bin\project.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csc.exe
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csc.exe.config
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csc.rsp
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csi.exe
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csi.exe.config
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\csi.rsp
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CodeAnalysis.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.CSharp.Core.targets
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.Managed.Core.targets
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.AppContext.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Collections.Immutable.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Console.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Diagnostics.StackTrace.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.IO.Compression.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.IO.FileSystem.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.IO.Pipes.AccessControl.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.IO.Pipes.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Reflection.Metadata.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.AccessControl.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Claims.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Security.Principal.Windows.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Text.Encoding.CodePages.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.ValueTuple.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Xml.ReaderWriter.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Xml.XmlDocument.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Xml.XPath.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\System.Xml.XPath.XDocument.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\vbc.exe
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\vbc.exe.config
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\vbc.rsp
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\VBCSCompiler.exe
+c:\Users\Yi Yi\source\repos\project\project\bin\roslyn\VBCSCompiler.exe.config
+c:\Users\Yi Yi\source\repos\project\project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\MySql.Data.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\Newtonsoft.Json.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Net.Http.Formatting.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Web.Http.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Web.Http.WebHost.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\Google.Protobuf.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\ZstdNet.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\K4os.Compression.LZ4.Streams.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\BouncyCastle.Crypto.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\Ubiety.Dns.Core.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Buffers.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\K4os.Compression.LZ4.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\K4os.Hash.xxHash.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\MySql.Data.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\Newtonsoft.Json.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Net.Http.Formatting.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Web.Http.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\System.Web.Http.WebHost.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+c:\Users\Yi Yi\source\repos\project\project\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\zh-Hant\System.Web.Http.resources.dll
+c:\Users\Yi Yi\source\repos\project\project\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.vbprojAssemblyReference.cache
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.Resources.resources
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.vbproj.GenerateResource.cache
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.vbproj.CoreCompileInputs.cache
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.vbproj.CopyComplete
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.dll
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.xml
+c:\Users\Yi Yi\source\repos\project\project\obj\Debug\project.pdb
+C:\Users\Yi Yi\source\repos\project\project\bin\Dapper.dll
+C:\Users\Yi Yi\source\repos\project\project\bin\Dapper.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\project.dll.config
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\project.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\project.pdb
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\project.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csc.exe
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csc.exe.config
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csc.rsp
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csi.exe
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csi.exe.config
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\csi.rsp
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.AppContext.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Console.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.IO.Compression.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.IO.Pipes.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Claims.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.ValueTuple.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Xml.XPath.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\vbc.exe
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\vbc.exe.config
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\vbc.rsp
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\VBCSCompiler.exe
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Dapper.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\MySql.Data.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Newtonsoft.Json.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Net.Http.Formatting.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Web.Http.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Web.Http.WebHost.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Google.Protobuf.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\ZstdNet.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\K4os.Compression.LZ4.Streams.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\BouncyCastle.Crypto.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Ubiety.Dns.Core.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Buffers.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\K4os.Compression.LZ4.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\K4os.Hash.xxHash.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Dapper.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\MySql.Data.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Newtonsoft.Json.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Net.Http.Formatting.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Web.Http.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\System.Web.Http.WebHost.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\zh-Hant\System.Net.Http.Formatting.resources.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\zh-Hant\System.Web.Http.resources.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\zh-Hant\System.Web.Http.WebHost.resources.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.vbprojAssemblyReference.cache
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.Resources.resources
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.vbproj.GenerateResource.cache
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.vbproj.CoreCompileInputs.cache
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.vbproj.CopyComplete
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.dll
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.xml
+C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\obj\Debug\project.pdb
