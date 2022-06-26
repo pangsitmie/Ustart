@@ -92,6 +92,15 @@ CREATE TABLE `project`.`purd_status` (
 INSERT INTO `project`.`purd_status` (`istatus`,`nstatus`,`ememo`)
 VALUES ('T','啟用','商品上架、呈現'),('F','停用','商品下架、隱藏'),('D','刪除','商品已被刪除');
 
+create table `view_log`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `iacc` varchar(255) not null,
+  `ipd` varchar(255) not null,
+  `dviewdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  index(`iacc`,`ipd`)
+);
+
 create table `purd_car`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `iacc` varchar(255) not null,
@@ -100,5 +109,3 @@ create table `purd_car`(
   `istatus` char(1) NOT NULL DEFAULT 'T',
   PRIMARY KEY (`id`)
 );
-
- insert into purd_car (iacc,ipid,qquantity) values (1,1,10);

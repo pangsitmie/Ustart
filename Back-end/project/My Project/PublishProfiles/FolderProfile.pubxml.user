@@ -37,13 +37,13 @@
       <publishTime>02/18/2018 09:44:54</publishTime>
     </File>
     <File Include="bin/project.dll">
-      <publishTime>06/26/2022 20:15:42</publishTime>
+      <publishTime>06/26/2022 20:44:18</publishTime>
     </File>
     <File Include="bin/project.pdb">
-      <publishTime>06/26/2022 20:15:42</publishTime>
+      <publishTime>06/26/2022 20:44:18</publishTime>
     </File>
     <File Include="bin/project.xml">
-      <publishTime>06/26/2022 20:15:42</publishTime>
+      <publishTime>06/26/2022 20:44:18</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 13:38:22</publishTime>

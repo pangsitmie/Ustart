@@ -96,6 +96,30 @@ Namespace Controllers
         End Function
     End Class
 
+    Public Class viewLogController
+        Inherits ApiController
+
+        ' POST: api/viewLog
+        Public Function PostValue(<FromBody()> ByVal value As view_log)
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            Dim iacc As String = value.iacc
+            Dim ipd As String = value.ipd
+
+            Dim view_logs As New List(Of view_log)
+            Dim view_log As New view_log
+            view_log.iacc = iacc
+            view_log.ipd = ipd
+            view_logs.Add(view_log)
+            s = "INSERT INTO `project`.`view_log` (`iacc`, `ipd`) VALUES (@iacc, @ipd);"
+            conn.oConn.Execute(s, view_logs)
+
+            feedback.rid = 1
+            feedback.message = "記錄成功"
+            Return feedback
+        End Function
+    End Class
 End Namespace
 
 Public Class login
