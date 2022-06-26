@@ -84,7 +84,7 @@ Namespace Controllers
             member.ephone = phone
             member.eemail = email
             member.qpoint = 0
-            member.dlogin = Format(Now, "yyyy-MM-dd hh:mm:ss")
+            member.dlogin = Format(Now, "yyyy-MM-dd HH:mm:ss")
             members.Add(member)
             s = "INSERT INTO `project`.`member` (`iuid`, `icode`, `nname`, `isex`, `ephone`, `eemail`, `qpoint`, `dlogin`) VALUES (@iuid, @icode, @nname, @isex, @ephone, @eemail, @qpoint, @dlogin);"
             conn.oConn.Execute(s, members)
