@@ -116,6 +116,7 @@
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="App_Code\conn.vb" />
     <Compile Include="Controllers\memberController.vb" />
+    <Compile Include="Controllers\orderController.vb" />
     <Compile Include="Controllers\purdConfigController.vb" />
     <Compile Include="Controllers\purdController.vb" />
     <Compile Include="Controllers\venderController.vb" />

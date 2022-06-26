@@ -4,7 +4,6 @@ Imports Dapper
 
 Namespace Controllers
 
-
     Public Class purdStatusController
         Inherits ApiController
 
@@ -45,6 +44,23 @@ Namespace Controllers
 
     Public Class purdDataController
         Inherits ApiController
+
+        ' GET: api/purdData
+        Public Function GetValue(ByVal ipd As String)
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            s = "select `ipd`, `ivender`, `nname`, `qprice`, `qquantity`, `itype`, `iunit`, `dindate`, `dlinedate`, `dfinalprice` from purd_data where ipd = @ipd and istatus <> 'D';"
+            Dim rs As List(Of purd_data) = conn.oConn.Query(Of purd_data)(s, New With {.ipd = ipd})
+
+            If rs.Count > 0 Then
+                Return rs(0)
+            Else
+                feedback.rid = -1
+                feedback.message = "查無資料"
+                Return feedback
+            End If
+        End Function
 
         ' POST: api/purdData
         Public Function PostValue(<FromBody()> ByVal value As purd_data)
