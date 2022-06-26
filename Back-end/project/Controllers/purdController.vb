@@ -56,6 +56,7 @@ Namespace Controllers
             Dim qprice As Double = value.qprice
             Dim qquantity As Integer = value.qquantity
             Dim itype As String = value.itype
+            Dim iunit As String = value.iunit
             Dim dindate As String = value.dindate
             Dim dlinedate As String = value.dlinedate
             Dim dfinalprice As Double = value.dfinalprice
@@ -68,11 +69,12 @@ Namespace Controllers
             purd_data.qprice = qprice
             purd_data.qquantity = qquantity
             purd_data.itype = itype
+            purd_data.iunit = iunit
             purd_data.dindate = dindate
             purd_data.dlinedate = dlinedate
             purd_data.dfinalprice = dfinalprice
             purd_datas.Add(purd_data)
-            s = String.Format("INSERT INTO `project`.`purd_data` (`ivender`, `nname`, `qprice`, `qquantity`, `itype`, `dindate`, `dlinedate`, `dfinalprice`, `dchgdate`, `istatus`) VALUES (@ivender, @nname, @qprice, @qquantity, @itype, @dindate, @dlinedate, @dfinalprice, '{0}', 'F');", dchgdate)
+            s = String.Format("INSERT INTO `project`.`purd_data` (`ivender`, `nname`, `qprice`, `qquantity`, `itype`, `iunit`, `dindate`, `dlinedate`, `dfinalprice`, `dchgdate`, `istatus`) VALUES (@ivender, @nname, @qprice, @qquantity, @itype, @iunit, @dindate, @dlinedate, @dfinalprice, '{0}', 'F');", dchgdate)
             conn.oConn.Execute(s, purd_datas)
 
             feedback.rid = 1
@@ -91,6 +93,7 @@ Namespace Controllers
             Dim u_qprice As Double = value.qprice
             Dim u_qquantity As Integer = value.qquantity
             Dim u_itype As String = value.itype
+            Dim u_iunit As String = value.iunit
             Dim u_dindate As String = value.dindate
             Dim u_dlinedate As String = value.dlinedate
             Dim u_dfinalprice As Double = value.dfinalprice
@@ -114,11 +117,12 @@ Namespace Controllers
             purd_data.qprice = u_qprice
             purd_data.qquantity = u_qquantity
             purd_data.itype = u_itype
+            purd_data.iunit = u_iunit
             purd_data.dindate = u_dindate
             purd_data.dlinedate = u_dlinedate
             purd_data.dfinalprice = u_dfinalprice
             purd_datas.Add(purd_data)
-            s = String.Format("UPDATE `project`.`purd_data` set `ivender` = @ivender, `nname` = @nname, `qprice` = @qprice, `qquantity` = @qquantity, `itype` = @itype, `dindate` = @dindate, `dlinedate` = @dlinedate, `dfinalprice` = @dfinalprice, `dchgdate` = '{0}' WHERE ipd = '{1}';", u_dchgdate, ipd)
+            s = String.Format("UPDATE `project`.`purd_data` set `ivender` = @ivender, `nname` = @nname, `qprice` = @qprice, `qquantity` = @qquantity, `itype` = @itype, `iunit` = @iunit, `dindate` = @dindate, `dlinedate` = @dlinedate, `dfinalprice` = @dfinalprice, `dchgdate` = '{0}' WHERE ipd = '{1}';", u_dchgdate, ipd)
             conn.oConn.Execute(s, purd_datas)
 
             feedback.rid = 1

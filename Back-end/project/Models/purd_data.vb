@@ -5,6 +5,7 @@
     Public Property qprice As Double
     Public Property qquantity As Integer
     Public Property itype As String
+    Public Property iunit As String
     Public Property dindate As String
     Public Property dlinedate As String
     Public Property dfinalprice As Double

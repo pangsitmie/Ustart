@@ -136,6 +136,139 @@ Namespace Controllers
         End Function
     End Class
 
+    Public Class purdUnitController
+        Inherits ApiController
+
+        ' GET: api/purdUnit
+        Public Function GetValues()
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            s = "select iunit,nname,ememo from purd_unit;"
+            Dim rs As List(Of purd_unit) = conn.oConn.Query(Of purd_unit)(s)
+            If rs.Count > 0 Then
+                Return rs
+            Else
+                feedback.rid = -1
+                feedback.message = "查無資料"
+                Return feedback
+            End If
+        End Function
+
+        ' GET: api/purdUnit/5
+        Public Function GetValue(ByVal iunit As Integer)
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            s = "select iunit,nname,ememo from purd_unit where iunit = @iunit;"
+            Dim rs As List(Of purd_unit) = conn.oConn.Query(Of purd_unit)(s, New With {.iunit = iunit})
+
+            If rs.Count > 0 Then
+                Return rs(0)
+            Else
+                feedback.rid = -1
+                feedback.message = "查無資料"
+                Return feedback
+            End If
+        End Function
+
+        ' POST: api/purdUnit
+        Public Function PostValue(<FromBody()> ByVal value As purd_unit)
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            Dim nname As String = value.nname
+            Dim ememo As String = value.ememo
+
+            s = "select nname from purd_unit where nname = @nname;"
+            Dim rs As List(Of purd_unit) = conn.oConn.Query(Of purd_unit)(s, New With {.nname = nname})
+
+            If rs.Count > 0 Then
+                If rs.FindAll(Function(x) x.nname = nname).Count > 0 Then
+                    feedback.rid = -1
+                    feedback.message = "已存在"
+                    Return feedback
+                End If
+            End If
+
+
+            Dim purd_units As New List(Of purd_unit)
+            Dim purd_unit As New purd_unit
+            purd_unit.nname = nname
+            purd_unit.ememo = ememo
+            purd_units.Add(purd_unit)
+            s = "INSERT INTO `project`.`purd_unit` (`nname`, `ememo`) VALUES (@nname, @ememo);"
+            conn.oConn.Execute(s, purd_units)
+
+            feedback.rid = 1
+            feedback.message = "新增成功"
+            Return feedback
+        End Function
+
+        ' PUT: api/purdUnit/5
+        Public Function PutValue(ByVal iunit As String, <FromBody()> ByVal value As purd_unit)
+
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+            Dim u_iunit As String = value.iunit
+            Dim u_nname As String = value.nname
+            Dim u_ememo As String = value.ememo
+
+            s = "select iunit from purd_unit where iunit = @iunit;"
+            Dim rs As List(Of purd_unit) = conn.oConn.Query(Of purd_unit)(s, New With {.iunit = iunit})
+
+            If rs.Count < 1 Then
+                If rs.FindAll(Function(x) x.iunit = iunit).Count < 1 Then
+                    feedback.rid = -1
+                    feedback.message = "不存在"
+                    Return feedback
+                End If
+            End If
+
+            Dim purd_units As New List(Of purd_unit)
+            Dim purd_unit As New purd_unit
+            purd_unit.nname = u_nname
+            purd_unit.ememo = u_ememo
+            purd_units.Add(purd_unit)
+            s = String.Format("UPDATE `project`.`purd_unit` set `nname` = @nname, `ememo` = @ememo WHERE iunit = '{0}';", iunit)
+            conn.oConn.Execute(s, purd_units)
+
+            feedback.rid = 1
+            feedback.message = "更新成功"
+            Return feedback
+        End Function
+
+        ' DELETE: api/purdUnit/5
+        Public Function DeleteValue(ByVal iunit As Integer)
+            Dim feedback As New feedback
+            Dim conn As conn = New conn("project")
+            Dim s As String = String.Empty
+
+            s = "select iunit from purd_unit where iunit = @iunit;"
+            Dim rs As List(Of purd_unit) = conn.oConn.Query(Of purd_unit)(s, New With {.iunit = iunit})
+
+            If rs.Count < 1 Then
+                If rs.FindAll(Function(x) x.iunit = iunit).Count < 1 Then
+                    feedback.rid = -1
+                    feedback.message = "不存在"
+                    Return feedback
+                End If
+            End If
+
+            Dim purd_units As New List(Of purd_unit)
+            Dim purd_unit As New purd_unit
+            purd_unit.iunit = iunit
+            purd_units.Add(purd_unit)
+            s = "delete from `project`.`purd_unit` where iunit = @iunit;"
+            conn.oConn.Execute(s, purd_unit)
+
+            feedback.rid = 1
+            feedback.message = "成功刪除"
+            Return feedback
+        End Function
+    End Class
+
     Public Class purdPicController
         Inherits ApiController
 

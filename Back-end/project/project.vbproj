@@ -130,6 +130,7 @@
     <Compile Include="Models\purd_data.vb" />
     <Compile Include="Models\purd_pic.vb" />
     <Compile Include="Models\purd_trade.vb" />
+    <Compile Include="Models\purd_unit.vb" />
     <Compile Include="Models\purd_type.vb" />
     <Compile Include="Models\vender.vb" />
     <Compile Include="Models\view_log.vb" />
