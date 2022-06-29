@@ -21,5 +21,13 @@
     <color name="blue">#0065FF</color>
     <color name="dark_blue">#131FBA</color>
 
+    <color name="green_1">#8FD974</color>
+    <color name="green_2">#7AC968</color>
+    <color name="green_3">#5BB462</color>
+    <color name="green_4">#4CA456</color>
+    <color name="gray">#394141</color>
+
+
+
 
 </resources>

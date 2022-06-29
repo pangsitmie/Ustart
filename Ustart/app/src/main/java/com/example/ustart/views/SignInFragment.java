@@ -64,8 +64,8 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        editTextEmail = view.findViewById(R.id.txtEditEmail);
-        editTextPassword = view.findViewById(R.id.txtEditPassword);
+        editTextEmail = view.findViewById(R.id.emailET);
+        editTextPassword = view.findViewById(R.id.passwordET);
         btnConfirm = view.findViewById(R.id.btnConfirm);
 
         navController = Navigation.findNavController(view);

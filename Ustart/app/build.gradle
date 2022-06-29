@@ -65,4 +65,7 @@ dependencies {
     //swipe view
     implementation 'com.github.Yalantis:Koloda-Android:v0.0.2-alpha'
 
+    //volley
+    implementation 'com.android.volley:volley:1.2.1'
+
 }
