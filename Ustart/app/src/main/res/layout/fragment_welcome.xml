@@ -8,11 +8,11 @@
 
     <ImageView
         android:id="@+id/shoppingIV"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/shopping_bag" />
+        android:layout_marginTop="100dp"
+        android:src="@drawable/foodrescuelogo" />
 
 
     <TextView
@@ -29,20 +29,20 @@
         android:textColor="@color/white"
         android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/shopBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/registerTV"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/round_button"
-        android:minHeight="55dp"
-        android:text="Start Shopping"
-        android:textColor="@color/purple"
-        android:textStyle="bold" />
+<!--    <Button-->
+<!--        android:id="@+id/shopBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/registerTV"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginLeft="80dp"-->
+<!--        android:layout_marginRight="80dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:background="@drawable/round_button"-->
+<!--        android:minHeight="55dp"-->
+<!--        android:text="Start Shopping"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textStyle="bold" />-->
 
     <Button
         android:id="@+id/registerTV"

@@ -23,8 +23,21 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
 import com.example.ustart.viewmodel.AuthViewModel;
@@ -32,41 +45,34 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterFragment extends Fragment {
 
 
     private TextView dateTV,signInTV;
-    private EditText uidET, nameET, emailET, passwordET, passwordConfirmET, dateET, phoneET ;
+    private EditText uidET, nameET, emailET, passwordET, passwordConfirmET, phoneET;
+    private RadioGroup radioGroup;
 
     private Button btnConfirm;
     private String date, uploadDateOfBirth;
-    private ProgressDialog pd;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    private AuthViewModel authViewModel;
     private NavController navController;
 
+    final String url = "http://192.168.1.3/ustart/api/signup";
+    private String tempSex ="0";
 
-    //    FIREBASE
-//    private FirebaseAuth mAuth;
-//    private DatabaseReference mRef;
-//    private String UID;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        authViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory
-//            .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
-//        authViewModel.getUserMutableLiveData().observe(this, new Observer<FirebaseUser>() {
-//            @Override
-//            public void onChanged(FirebaseUser firebaseUser) {
-//                if(firebaseUser != null){
-//                    Intent intent  = new Intent(getContext(), MainActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -85,6 +91,24 @@ public class RegisterFragment extends Fragment {
         passwordConfirmET = view.findViewById(R.id.passwordConfirmET);
         dateTV = view.findViewById(R.id.dateTV);
         phoneET = view.findViewById(R.id.phoneET);
+
+        radioGroup = view.findViewById(R.id.radioGroup);
+        // get selected radio button from radioGroup
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+                switch(checkedId) {
+                    case R.id.radioButton1:
+                        tempSex = "0";
+                        break;
+                    case R.id.radioButton2:
+                        tempSex = "1";
+                        break;
+                }
+            }
+        });
+
 
         signInTV= view.findViewById(R.id.signInTV);
         btnConfirm = view.findViewById(R.id.btnConfirm);
@@ -133,6 +157,7 @@ public class RegisterFragment extends Fragment {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String tempUID = uidET.getText().toString().trim();
                 String tempName = nameET.getText().toString().trim();
                 String tempEmail = emailET.getText().toString().trim();
@@ -140,7 +165,6 @@ public class RegisterFragment extends Fragment {
                 String tempConfirmPassword = passwordConfirmET.getText().toString().trim();
                 String tempDate = dateTV.getText().toString();
                 String tempPhone = phoneET.getText().toString();
-
 
                 //DATA VALIDATION
                 if (tempUID.isEmpty()) {
@@ -189,13 +213,50 @@ public class RegisterFragment extends Fragment {
                 if (!Patterns.PHONE.matcher(tempPhone).matches()) {
                     phoneET.setError("Please provide valid number!");
                     phoneET.requestFocus();
-                    return;
                 }
 
-//                authViewModel.register(tempEmail,tempPassword);
+                //send signup API request
+                signup(tempUID, tempName, tempEmail, tempPassword, uploadDateOfBirth, tempPhone,tempSex);
             }
         });
     }
+    //signup API request
+    private void signup(String uid, String name, String email, String pwd, String date, String phone, String sex){
 
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("uid", uid);
+                params.put("name", name);
+                params.put("email", email);
+                params.put("pwd", pwd);
+                params.put("date", date);
+                params.put("phone", phone);
+                params.put("sex", sex);
+
+                return params;
+            }
+        };
+
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(postRequest);
+
+        Toast.makeText(getContext(), "Sign up success!", Toast.LENGTH_SHORT).show();
+    }
 }

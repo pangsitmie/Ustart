@@ -11,7 +11,7 @@ android:color="@color/grey_ripple">
         <corners
             android:radius="8dp"
             />
-        <stroke android:width="1dip" android:color="@color/purple"/>
+        <stroke android:width="1dip" android:color="@color/green_3"/>
     </shape>
 </item>
 </ripple>

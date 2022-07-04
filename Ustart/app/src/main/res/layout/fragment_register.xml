@@ -201,6 +201,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dateTV" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -212,6 +213,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phoneET">
 
         <RadioButton
+            android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Male"
@@ -219,6 +221,7 @@
             android:layout_marginRight="5dp"/>
 
         <RadioButton
+            android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Female"

@@ -31,20 +31,20 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="25dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="25dp"
                     android:src="@drawable/ic_person"
-                    app:tint="@color/purple"/>
+                    app:tint="@color/green_4" />
 
                 <TextView
                     android:id="@+id/toolbarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/toolbarIcon"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginBottom="2dp"
                     android:text="Food Rescue"
-                    android:layout_centerHorizontal="true"
-                    android:textColor="@color/purple"
+                    android:textColor="@color/green_4"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -52,12 +52,12 @@
                     android:id="@+id/shoppingCartIcon"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="25dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginRight="30dp"
+                    android:layout_marginBottom="25dp"
                     android:src="@drawable/shopping_bag"
-                    app:tint="@color/purple"/>
+                    app:tint="@color/green_4" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/purple"
+            android:background="@color/green_4"
             android:backgroundTint="@color/white"
             android:padding="4dp"
             app:itemIconTint="@menu/icons_color"
