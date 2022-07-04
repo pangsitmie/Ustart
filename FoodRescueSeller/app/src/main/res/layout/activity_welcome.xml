@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity"
-    android:background="@color/green_4">
+    android:background="@color/purple">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
