@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,10 +30,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
+import com.example.ustart.model.SaveSharedPreference;
 import com.example.ustart.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +49,7 @@ public class SignInFragment extends Fragment {
 //    private AuthViewModel authViewModel;
     private NavController navController;
 
-    final String url = "http://192.168.1.3/ustart/api/login";
+    final String url = "http://192.168.1.9/ustart/api/login";
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,33 +85,42 @@ public class SignInFragment extends Fragment {
                     uidET.requestFocus();
                     return;
                 }
-//                if (!Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
-//                    editTextEmail.setError("Please provide valid email!");
-//                    editTextEmail.requestFocus();
-//                    return;
-//                }
+
                 if (tempPassword.isEmpty()) {
                     passwordET.setError("Password is required!");
                     passwordET.requestFocus();
                     return;
                 }
                 signin(tempUID, tempPassword);
-
-//                authViewModel.signIn(tempUID,tempPassword);
             }
         });
     }
 
     private void signin(String uid, String password){
-
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+                Log.d("anyText", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String rid = jsonObject.getString("rid");
+                    String message = jsonObject.getString("message");
+
+                    if(rid.equals("1")){
+                        Toast.makeText(getContext(), "Sing In Success", Toast.LENGTH_SHORT).show();
+                        SaveSharedPreference.setUID(getContext(), uid);
+                        Intent login = new Intent(getContext(), MainActivity.class);
+                        startActivity(login);
+                    }
+                    else{
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Sign in error !1"+e,Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -130,7 +143,5 @@ public class SignInFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(postRequest);
-
-//        Toast.makeText(getContext(), "sign in success!", Toast.LENGTH_SHORT).show();
     }
 }

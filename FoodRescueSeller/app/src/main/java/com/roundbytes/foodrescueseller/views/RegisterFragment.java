@@ -2,6 +2,7 @@ package com.roundbytes.foodrescueseller.views;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -30,7 +31,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.roundbytes.foodrescueseller.MainActivity;
 import com.roundbytes.foodrescueseller.R;
+
+import org.json.JSONObject;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -210,7 +214,24 @@ public class RegisterFragment extends Fragment {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                Log.d("anyText", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String rid = jsonObject.getString("rid");
+                    String message = jsonObject.getString("message");
+
+                    if(rid.equals("1")){
+                        Toast.makeText(getContext(), "Sign up success", Toast.LENGTH_SHORT).show();
+                        Intent login = new Intent(getContext(), MainActivity.class);
+                        startActivity(login);
+                    }
+                    else{
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Sign up error !1"+e,Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

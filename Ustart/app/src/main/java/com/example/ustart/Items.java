@@ -1,67 +1,107 @@
 package com.example.ustart;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Items {
-    String title,desc, imgURL;
-    Double originalPrice, currentPrice;
-    LocalDate expDate;
+    int ipd, qQuantity;
+    String iVender, nName;
+    ArrayList<Integer> iType = new ArrayList<>();
+    ArrayList<Integer> iUnit = new ArrayList<>();
+    double qPrice, dFinalPrice;
+    LocalDate dInDate, dLineDate;
 
-    public Items(String title, String desc, String imgURL, Double originalPrice, Double currentPrice, LocalDate expDate) {
-        this.title = title;
-        this.desc = desc;
-        this.imgURL = imgURL;
-        this.originalPrice = originalPrice;
-        this.currentPrice = currentPrice;
-        this.expDate = expDate;
+    public Items(int ipd, String iVender, String nName, ArrayList<Integer> iType, ArrayList<Integer> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate) {
+        this.ipd = ipd;
+        this.iVender = iVender;
+        this.nName = nName;
+        this.iType = iType;
+        this.iUnit = iUnit;
+        this.qPrice = qPrice;
+        this.qQuantity = qQuantity;
+        this.dFinalPrice = dFinalPrice;
+        this.dInDate = dInDate;
+        this.dLineDate = dLineDate;
     }
 
-    public String getTitle() {
-        return title;
+    public int getIpd() {
+        return ipd;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setIpd(int ipd) {
+        this.ipd = ipd;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getiVender() {
+        return iVender;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setiVender(String iVender) {
+        this.iVender = iVender;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public String getnName() {
+        return nName;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setnName(String nName) {
+        this.nName = nName;
     }
 
-    public Double getOriginalPrice() {
-        return originalPrice;
+    public ArrayList<Integer> getiType() {
+        return iType;
     }
 
-    public void setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
+    public void setiType(ArrayList<Integer> iType) {
+        this.iType = iType;
     }
 
-    public Double getCurrentPrice() {
-        return currentPrice;
+    public ArrayList<Integer> getiUnit() {
+        return iUnit;
     }
 
-    public void setCurrentPrice(Double currentPrice) {
-        this.currentPrice = currentPrice;
+    public void setiUnit(ArrayList<Integer> iUnit) {
+        this.iUnit = iUnit;
     }
 
-    public LocalDate getExpDate() {
-        return expDate;
+    public double getqPrice() {
+        return qPrice;
     }
 
-    public void setExpDate(LocalDate expDate) {
-        this.expDate = expDate;
+    public void setqPrice(double qPrice) {
+        this.qPrice = qPrice;
+    }
+
+    public int getqQuantity() {
+        return qQuantity;
+    }
+
+    public void setqQuantity(int qQuantity) {
+        this.qQuantity = qQuantity;
+    }
+
+    public double getdFinalPrice() {
+        return dFinalPrice;
+    }
+
+    public void setdFinalPrice(double dFinalPrice) {
+        this.dFinalPrice = dFinalPrice;
+    }
+
+    public LocalDate getdInDate() {
+        return dInDate;
+    }
+
+    public void setdInDate(LocalDate dInDate) {
+        this.dInDate = dInDate;
+    }
+
+    public LocalDate getdLineDate() {
+        return dLineDate;
+    }
+
+    public void setdLineDate(LocalDate dLineDate) {
+        this.dLineDate = dLineDate;
     }
 }

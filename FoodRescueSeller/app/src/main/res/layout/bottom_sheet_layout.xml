@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/iVender"
+            android:id="@+id/desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
@@ -56,10 +56,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/qPrice"
+            android:id="@+id/originalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iVender"
+            android:layout_below="@+id/desc"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/img"
@@ -72,10 +72,10 @@
             android:id="@+id/currentPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iVender"
+            android:layout_below="@+id/desc"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/qPrice"
+            android:layout_toRightOf="@+id/originalPrice"
             android:text="Current"
             android:textColor="@color/blue"
             android:textSize="16sp"

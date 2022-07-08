@@ -13,4 +13,38 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/green_4</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!-- styles.xml -->
+    <style name="ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">false</item>
+    </style>
+
+    <!--ANIMATIONS-->
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name ="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name ="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name ="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name ="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="actionOverflowButtonStyle">@style/OverFlow</item>
+    </style>
+
+    <style name="OverFlow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="srcCompat">@drawable/ic_person</item>
+    </style>
+
+    <style name="Shape" parent="">
+        <item name="cornerSize">5%</item>
+    </style>
 </resources>

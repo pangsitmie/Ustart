@@ -2,6 +2,7 @@ package com.roundbytes.foodrescueseller.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roundbytes.foodrescueseller.MainActivity;
 import com.roundbytes.foodrescueseller.R;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,33 +76,40 @@ public class SignInFragment extends Fragment {
                     uidET.requestFocus();
                     return;
                 }
-//                if (!Patterns.EMAIL_ADDRESS.matcher(tempEmail).matches()) {
-//                    editTextEmail.setError("Please provide valid email!");
-//                    editTextEmail.requestFocus();
-//                    return;
-//                }
                 if (tempPassword.isEmpty()) {
                     passwordET.setError("Password is required!");
                     passwordET.requestFocus();
                     return;
                 }
                 signin(tempUID, tempPassword);
-
-//                authViewModel.signIn(tempUID,tempPassword);
             }
         });
     }
 
     private void signin(String uid, String password){
-
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+                Log.d("anyText", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String rid = jsonObject.getString("rid");
+                    String message = jsonObject.getString("message");
+
+                    if(rid.equals("1")){
+                        Toast.makeText(getContext(), "Sing In Success", Toast.LENGTH_SHORT).show();
+                        Intent login = new Intent(getContext(), MainActivity.class);
+                        startActivity(login);
+                    }
+                    else{
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Sign in error !1"+e,Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -122,7 +132,5 @@ public class SignInFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(postRequest);
-
-//        Toast.makeText(getContext(), "sign in success!", Toast.LENGTH_SHORT).show();
     }
 }

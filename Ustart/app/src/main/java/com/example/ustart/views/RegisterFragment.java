@@ -66,7 +66,7 @@ public class RegisterFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private NavController navController;
 
-    final String url = "http://192.168.1.3/ustart/api/signup";
+    final String url = "http://192.168.1.9/ustart/api/signup";
     private String tempSex ="0";
 
 
@@ -228,7 +228,24 @@ public class RegisterFragment extends Fragment {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), response, Toast.LENGTH_SHORT).show();
+                Log.d("anyText", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String rid = jsonObject.getString("rid");
+                    String message = jsonObject.getString("message");
+
+                    if(rid.equals("1")){
+                        Toast.makeText(getContext(), "Sign up success", Toast.LENGTH_SHORT).show();
+                        Intent login = new Intent(getContext(), MainActivity.class);
+                        startActivity(login);
+                    }
+                    else{
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Sign up error !1"+e,Toast.LENGTH_LONG).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

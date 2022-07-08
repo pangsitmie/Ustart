@@ -16,7 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ustart.MainActivity;
 import com.example.ustart.R;
+import com.example.ustart.WelcomeActivity;
+import com.example.ustart.model.SaveSharedPreference;
 import com.example.ustart.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -42,6 +45,8 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         registerBtn = view.findViewById(R.id.registerTV);
         signInBtn = view.findViewById(R.id.singInTV);

@@ -1,4 +1,4 @@
-package com.example.ustart.adapter;
+package com.roundbytes.foodrescueseller.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,8 +19,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ustart.Items;
-import com.example.ustart.R;
+import com.roundbytes.foodrescueseller.Items;
+import com.roundbytes.foodrescueseller.R;
+
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -38,37 +39,34 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     }
     @NonNull
     @Override
-    public ItemsRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.explore_card, parent, false);
-        return new ItemsRecViewAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemsRecViewAdapter.ViewHolder holder, int position) {
-//        String imgUrl = itemsList.get(position).get();
-        String vender = itemsList.get(position).getiVender();
-        String itemTitle = itemsList.get(position).getnName();
-        Double originalPrice = itemsList.get(position).getqPrice();
-        Double currentPrice = itemsList.get(position).getdFinalPrice();
-//        String desc = itemsList.get(position).getDesc();
-        LocalDate expDate = itemsList.get(position).getdLineDate();
-        int quantity = itemsList.get(position).getqQuantity();
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String imgUrl = itemsList.get(position).getImgURL();
+        String itemTitle = itemsList.get(position).getTitle();
+        Double originalPrice = itemsList.get(position).getOriginalPrice();
+        Double currentPrice = itemsList.get(position).getCurrentPrice();
+        String desc = itemsList.get(position).getDesc();
+        LocalDate expDate = itemsList.get(position).getExpDate();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = expDate.toString();
 
-        //Glide.with(mContext).load(imgUrl).into(holder.itemImg);
+        Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
         holder.originalPrice.setText(String.valueOf(originalPrice));
         holder.currentPrice.setText(String.valueOf(currentPrice));
-//        holder.desc.setText(desc);
+        holder.desc.setText(desc);
         holder.expDate.setText(strDate);
-        holder.qQuantity.setText(quantity);
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, itemsList.get(holder.getAdapterPosition()).getnName()+"Clickled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, itemsList.get(holder.getAdapterPosition()).getTitle()+"Clickled", Toast.LENGTH_SHORT).show();
                 showDialog();
             }
         });
@@ -86,18 +84,18 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView parent;
         ImageView itemImg;
-        TextView itemTitle, dcPercent, originalPrice, currentPrice, desc, expDate, qQuantity;
+        TextView itemTitle, dcPercent, originalPrice, currentPrice, desc, expDate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             parent = itemView.findViewById(R.id.parent);
             itemImg = itemView.findViewById(R.id.img);
-            itemTitle = itemView.findViewById(R.id.nName);
+            itemTitle = itemView.findViewById(R.id.itemTitle);
             dcPercent = itemView.findViewById(R.id.dcPercent);
-            originalPrice = itemView.findViewById(R.id.qPrice);
+            originalPrice = itemView.findViewById(R.id.originalPrice);
             currentPrice = itemView.findViewById(R.id.currentPrice);
-            qQuantity = itemView.findViewById(R.id.qQuantity);
+            desc = itemView.findViewById(R.id.desc);
             expDate = itemView.findViewById(R.id.expTV);
         }
     }
@@ -108,8 +106,8 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         ImageView img = dialog.findViewById(R.id.img);
         TextView title = dialog.findViewById(R.id.title);
-        TextView desc = dialog.findViewById(R.id.iVender);
-        TextView originalPrice = dialog.findViewById(R.id.qPrice);
+        TextView desc = dialog.findViewById(R.id.desc);
+        TextView originalPrice = dialog.findViewById(R.id.originalPrice);
         TextView currentPrice = dialog.findViewById(R.id.currentPrice);
         Button btnMinTransaction = dialog.findViewById(R.id.btnMinTransaction);
         TextView amount = dialog.findViewById(R.id.amount);

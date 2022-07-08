@@ -70,13 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawer.openDrawer(GravityCompat.START);
             }
         });
-
-
-
-
-
-
-
     }
     //DRAWER NAV LISTENER
     @Override

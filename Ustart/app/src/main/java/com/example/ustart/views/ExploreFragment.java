@@ -10,16 +10,33 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ustart.Items;
 import com.example.ustart.adapter.ItemsRecViewAdapter;
 import com.example.ustart.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExploreFragment extends Fragment {
     private RecyclerView recView;
@@ -44,34 +61,56 @@ public class ExploreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recView = view.findViewById(R.id.itemsRecView);
 
-        LocalDate date1 = LocalDate.of(2022, 6, 15);
-        LocalDate date2 = LocalDate.of(2022, 7, 6);
+//        LocalDate date1 = LocalDate.of(2022, 6, 15);
+//        LocalDate date2 = LocalDate.of(2022, 7, 6);
 
 
-        itemsList.add(new Items("Milk", "a premium milk",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Fmilk.jpg?alt=media&token=644078bc-3c8f-41e0-a555-d2d06abb0624",
-                20.0,10.0, date1));
-        itemsList.add(new Items("Banana", "a premium banana you will never regret buy it",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Fbanana.jpg?alt=media&token=21538bd4-6656-4669-8f6e-c663bd46e6b5",
-                50.0,20.0, date2));
-        itemsList.add(new Items("Indomie", "a premium indomie",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Findomie.png?alt=media&token=a45510c4-b2ac-4d6d-9205-9263aac8a928",
-                8.0,4.0, date1));
-        itemsList.add(new Items("Oreo", "a premium oreo",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Foreo.png?alt=media&token=90343958-b601-4cbc-8624-ebf538046fe1",
-                30.0,15.0, date2));
-        itemsList.add(new Items("Nutella", "a premium Nutella",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Fnutella.jpg?alt=media&token=bee5da6f-46e6-49fa-be97-eeecb79096b8",
-                60.0,20.0, date1));
-        itemsList.add(new Items("Bread", "a premium Bread",
-                "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/items%2Fbread.jpg?alt=media&token=d43f01c5-fdc8-4c59-bec5-a3c45cff1b3c",
-                50.0,25.0, date1));
+
+        getExploreData();
 
         adapter = new ItemsRecViewAdapter(getActivity());
         adapter.setItemsList(itemsList);
 
         recView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recView.setAdapter(adapter);
+
+    }
+
+    private void getExploreData(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        String url = "http://192.168.1.9/ustart/api/purdData?ipd=";
+
+        for (int i=1;i<=3;i++){
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url+i, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    //loadingPB.setVisibility(View.GONE);
+                    try {
+                        String ipd = response.getString("ipd");
+                        String ivender = response.getString("ivender");
+                        String nname = response.getString("nname");
+                        String qprice = response.getString("qprice");
+                        String qquantity = response.getString("qquantity");
+                        String itype = response.getString("itype");
+                        String iunit = response.getString("iunit");
+                        String dindate = response.getString("dindate");
+                        String dlinedate = response.getString("dlinedate");
+                        String dfinalprice = response.getString("dfinalprice");
+                        Log.d("TAG", ipd+nname);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    //loadingPB.setVisibility(View.GONE);
+                    Toast.makeText(getContext(), "Failed to get market data", Toast.LENGTH_SHORT).show();
+                }
+            });
+            requestQueue.add(jsonObjectRequest);
+        }
 
     }
 }
