@@ -4,9 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.StrikethroughSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,28 +25,25 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapter.ViewHolder> {
+public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.ViewHolder> {
 
-    private static final String TAG = "ItemsRecViewAdapter";
+    private static final String TAG = "CartRecViewAdapter";
     private Context mContext;
     private ArrayList<Items> itemsList = new ArrayList<>();
-    private int itemSelected;
-    int itemSelectedAmount =1;
-    private static final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
 
     //constructor
-    public ItemsRecViewAdapter(Context mContext) {
+    public CartRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
     @NonNull
     @Override
-    public ItemsRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.explore_card, parent, false);
-        return new ItemsRecViewAdapter.ViewHolder(view);
+    public CartRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_card, parent, false);
+        return new CartRecViewAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemsRecViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartRecViewAdapter.ViewHolder holder, int position) {
 //        String imgUrl = itemsList.get(position).get();
         String vender = itemsList.get(position).getiVender();
         String itemTitle = itemsList.get(position).getnName();
@@ -64,18 +58,17 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         //Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
-        holder.currentPrice.setText(currentPrice +" NT");
+        holder.itemPrice.setText(currentPrice +" NT");
 //        holder.desc.setText(desc);
-//        holder.expDate.setText("Exp: "+strDate);
-//        holder.qQuantity.setText("Available: " + quantity);
+        holder.expDate.setText("Exp: "+strDate);
+        holder.qQuantity.setText(String.valueOf(quantity));
         holder.iVender.setText(vender);
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemSelected = holder.getAdapterPosition();
-                Toast.makeText(mContext, itemsList.get(itemSelected).getnName()+"Clickled", Toast.LENGTH_SHORT).show();
-                showDialog(itemSelected);
+                Toast.makeText(mContext, itemsList.get(holder.getAdapterPosition()).getnName()+"Clickled", Toast.LENGTH_SHORT).show();
+                showDialog();
             }
         });
     }
@@ -92,7 +85,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView parent;
         ImageView itemImg;
-        TextView itemTitle, currentPrice, iVender;
+        TextView itemTitle, itemPrice, iVender, expDate, qQuantity;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -101,53 +94,24 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             itemImg = itemView.findViewById(R.id.img);
             itemTitle = itemView.findViewById(R.id.nName);
             iVender = itemView.findViewById(R.id.expDate);
-            currentPrice = itemView.findViewById(R.id.currentPrice);
+            itemPrice = itemView.findViewById(R.id.itemPrice);
+            qQuantity = itemView.findViewById(R.id.qQuantity);
+            expDate = itemView.findViewById(R.id.expTV);
         }
     }
-    public void showDialog(int itemSelected){
+    public void showDialog(){
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet_layout);
 
         ImageView img = dialog.findViewById(R.id.img);
         TextView title = dialog.findViewById(R.id.title);
-        TextView  ivender= dialog.findViewById(R.id.ivender);
-        TextView expDate = dialog.findViewById(R.id.expDate);
+        TextView desc = dialog.findViewById(R.id.expDate);
         TextView originalPrice = dialog.findViewById(R.id.qPrice);
         TextView currentPrice = dialog.findViewById(R.id.currentPrice);
         Button btnMinTransaction = dialog.findViewById(R.id.btnMinTransaction);
         TextView amount = dialog.findViewById(R.id.amount);
         Button btnAddTransaction = dialog.findViewById(R.id.btnAddTransaction);
-
-        //set
-        title.setText(itemsList.get(itemSelected).getnName());
-        expDate.setText(itemsList.get(itemSelected).getdLineDate().toString());
-        ivender.setText(itemsList.get(itemSelected).getiVender());
-//        originalPrice.setText( );
-        String oPrice = String.valueOf(itemsList.get(itemSelected).getqPrice());
-        originalPrice.setText((oPrice), TextView.BufferType.SPANNABLE);
-        Spannable spannable = (Spannable) originalPrice.getText();
-        spannable.setSpan(STRIKE_THROUGH_SPAN, 0, oPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        currentPrice.setText( String.valueOf(itemsList.get(itemSelected).getdFinalPrice()));
-        amount.setText(String.valueOf(itemSelectedAmount));
-
-        btnMinTransaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemSelectedAmount--;
-                amount.setText(String.valueOf(itemSelectedAmount));
-            }
-        });
-
-        btnAddTransaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                itemSelectedAmount++;
-                amount.setText(String.valueOf(itemSelectedAmount));
-            }
-        });
-
 
         dialog.show();
         dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

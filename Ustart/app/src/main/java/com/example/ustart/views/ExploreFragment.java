@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ustart.Items;
+import com.example.ustart.MainActivity;
 import com.example.ustart.adapter.ItemsRecViewAdapter;
 import com.example.ustart.R;
 
@@ -33,15 +34,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ExploreFragment extends Fragment {
     private RecyclerView recView;
     private ItemsRecViewAdapter adapter;
-    private ArrayList<Items> itemsList = new ArrayList<Items>();
+    public static ArrayList<Items> items = new ArrayList<Items>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,56 +65,12 @@ public class ExploreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recView = view.findViewById(R.id.itemsRecView);
 
-//        LocalDate date1 = LocalDate.of(2022, 6, 15);
-//        LocalDate date2 = LocalDate.of(2022, 7, 6);
-
-
-
-        getExploreData();
-
         adapter = new ItemsRecViewAdapter(getActivity());
-        adapter.setItemsList(itemsList);
+        //uses itemlist from main activity
+        adapter.setItemsList(MainActivity.itemsList);
 
         recView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recView.setAdapter(adapter);
-
-    }
-
-    private void getExploreData(){
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-        String url = "http://192.168.1.9/ustart/api/purdData?ipd=";
-
-        for (int i=1;i<=3;i++){
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url+i, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    //loadingPB.setVisibility(View.GONE);
-                    try {
-                        String ipd = response.getString("ipd");
-                        String ivender = response.getString("ivender");
-                        String nname = response.getString("nname");
-                        String qprice = response.getString("qprice");
-                        String qquantity = response.getString("qquantity");
-                        String itype = response.getString("itype");
-                        String iunit = response.getString("iunit");
-                        String dindate = response.getString("dindate");
-                        String dlinedate = response.getString("dlinedate");
-                        String dfinalprice = response.getString("dfinalprice");
-                        Log.d("TAG", ipd+nname);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //loadingPB.setVisibility(View.GONE);
-                    Toast.makeText(getContext(), "Failed to get market data", Toast.LENGTH_SHORT).show();
-                }
-            });
-            requestQueue.add(jsonObjectRequest);
-        }
 
     }
 }

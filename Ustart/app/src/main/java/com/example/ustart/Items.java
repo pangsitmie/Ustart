@@ -25,6 +25,13 @@ public class Items {
         this.dLineDate = dLineDate;
     }
 
+//    public Items(int ipd, int qQuantity, String iVender, String nName) {
+//        this.ipd = ipd;
+//        this.qQuantity = qQuantity;
+//        this.iVender = iVender;
+//        this.nName = nName;
+//    }
+
     public int getIpd() {
         return ipd;
     }

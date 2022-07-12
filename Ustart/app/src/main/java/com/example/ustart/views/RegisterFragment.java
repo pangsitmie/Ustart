@@ -66,7 +66,7 @@ public class RegisterFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private NavController navController;
 
-    final String url = "http://192.168.1.9/ustart/api/signup";
+    final String url = R.string.API_URL + "signup";
     private String tempSex ="0";
 
 

@@ -10,19 +10,19 @@
         android:id="@+id/idEditSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
-        android:layout_marginLeft="15dp"
         android:background="@drawable/round_button"
-        android:backgroundTint="@color/card_color"
+        android:backgroundTint="@color/white_grey"
         android:hint="Search..."
         android:inputType="textCapCharacters"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textColor="@color/secondary_color"
-        android:textColorHint="@color/white_grey"
+        android:textColorHint="@color/gray"
         android:textSize="14sp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -30,10 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/idEditSearch"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_margin="10dp" />
 
 
 </RelativeLayout>

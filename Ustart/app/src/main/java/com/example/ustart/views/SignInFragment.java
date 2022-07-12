@@ -1,6 +1,7 @@
 package com.example.ustart.views;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
+import com.example.ustart.WelcomeActivity;
 import com.example.ustart.model.SaveSharedPreference;
 import com.example.ustart.viewmodel.AuthViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,7 +51,7 @@ public class SignInFragment extends Fragment {
 //    private AuthViewModel authViewModel;
     private NavController navController;
 
-    final String url = "http://192.168.1.9/ustart/api/login";
+    String url = WelcomeActivity.URL + "login";
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class SignInFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        Log.d("TAG", "onViewCreated: "+ url);
 
         uidET = view.findViewById(R.id.uidET);
         passwordET = view.findViewById(R.id.passwordET);
