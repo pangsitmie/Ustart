@@ -69,6 +69,12 @@ public class ExploreFragment extends Fragment {
         //uses itemlist from main activity
         adapter.setItemsList(MainActivity.itemsList);
 
+        for (int i=0;i< MainActivity.itemsList.size();i++)
+        {
+            Log.d("explore", MainActivity.itemsList.get(i).getImgURL());
+        }
+
+
         recView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recView.setAdapter(adapter);
 

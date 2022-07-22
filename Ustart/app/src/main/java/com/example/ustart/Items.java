@@ -6,13 +6,13 @@ import java.util.Date;
 
 public class Items {
     int ipd, qQuantity;
-    String iVender, nName;
-    ArrayList<Integer> iType = new ArrayList<>();
-    ArrayList<Integer> iUnit = new ArrayList<>();
+    String iVender, nName, imgURL;
+    ArrayList<String> iType = new ArrayList<>();
+    ArrayList<String> iUnit = new ArrayList<>();
     double qPrice, dFinalPrice;
     LocalDate dInDate, dLineDate;
 
-    public Items(int ipd, String iVender, String nName, ArrayList<Integer> iType, ArrayList<Integer> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate) {
+    public Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL) {
         this.ipd = ipd;
         this.iVender = iVender;
         this.nName = nName;
@@ -23,14 +23,9 @@ public class Items {
         this.dFinalPrice = dFinalPrice;
         this.dInDate = dInDate;
         this.dLineDate = dLineDate;
+        this.imgURL = imgURL;
     }
 
-//    public Items(int ipd, int qQuantity, String iVender, String nName) {
-//        this.ipd = ipd;
-//        this.qQuantity = qQuantity;
-//        this.iVender = iVender;
-//        this.nName = nName;
-//    }
 
     public int getIpd() {
         return ipd;
@@ -56,19 +51,19 @@ public class Items {
         this.nName = nName;
     }
 
-    public ArrayList<Integer> getiType() {
+    public ArrayList<String> getiType() {
         return iType;
     }
 
-    public void setiType(ArrayList<Integer> iType) {
+    public void setiType(ArrayList<String> iType) {
         this.iType = iType;
     }
 
-    public ArrayList<Integer> getiUnit() {
+    public ArrayList<String> getiUnit() {
         return iUnit;
     }
 
-    public void setiUnit(ArrayList<Integer> iUnit) {
+    public void setiUnit(ArrayList<String> iUnit) {
         this.iUnit = iUnit;
     }
 
@@ -86,6 +81,14 @@ public class Items {
 
     public void setqQuantity(int qQuantity) {
         this.qQuantity = qQuantity;
+    }
+
+    public void addQuantity(){
+        this.qQuantity++;
+    }
+
+    public void minQuantity(){
+        this.qQuantity--;
     }
 
     public double getdFinalPrice() {
@@ -110,5 +113,13 @@ public class Items {
 
     public void setdLineDate(LocalDate dLineDate) {
         this.dLineDate = dLineDate;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

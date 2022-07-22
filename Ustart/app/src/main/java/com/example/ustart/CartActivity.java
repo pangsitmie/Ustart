@@ -7,14 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.ustart.adapter.CartRecViewAdapter;
-import com.example.ustart.adapter.ItemsRecViewAdapter;
 
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
     private RecyclerView recView;
     private CartRecViewAdapter adapter;
-    public static ArrayList<Items> items = new ArrayList<Items>();
+    //public static ArrayList<Items> items = new ArrayList<Items>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +22,20 @@ public class CartActivity extends AppCompatActivity {
 
         adapter = new CartRecViewAdapter(getApplicationContext());
         //uses itemlist from main activity
-        adapter.setItemsList(MainActivity.itemsList);
+        adapter.setCartList(MainActivity.cartList);
 
         recView = findViewById(R.id.itemsRecView);
         recView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recView.setAdapter(adapter);
+
+
+
+
     }
+
+//    public static void initCartAdapter(){
+//        adapter = new CartRecViewAdapter(getApplicationContext());
+//        //uses itemlist from main activity
+//        adapter.setCartList(MainActivity.cartList);
+//    }
 }

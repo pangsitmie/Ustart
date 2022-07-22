@@ -21,7 +21,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
+import com.example.ustart.MainActivity;
 import com.example.ustart.R;
 
 import java.text.SimpleDateFormat;
@@ -50,7 +52,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ItemsRecViewAdapter.ViewHolder holder, int position) {
-//        String imgUrl = itemsList.get(position).get();
+        String imgUrl = itemsList.get(position).getImgURL();
         String vender = itemsList.get(position).getiVender();
         String itemTitle = itemsList.get(position).getnName();
         Double originalPrice = itemsList.get(position).getqPrice();
@@ -62,12 +64,9 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = expDate.toString();
 
-        //Glide.with(mContext).load(imgUrl).into(holder.itemImg);
+        Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
         holder.currentPrice.setText(currentPrice +" NT");
-//        holder.desc.setText(desc);
-//        holder.expDate.setText("Exp: "+strDate);
-//        holder.qQuantity.setText("Available: " + quantity);
         holder.iVender.setText(vender);
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +117,10 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Button btnMinTransaction = dialog.findViewById(R.id.btnMinTransaction);
         TextView amount = dialog.findViewById(R.id.amount);
         Button btnAddTransaction = dialog.findViewById(R.id.btnAddTransaction);
+        Button btnAddToCart = dialog.findViewById(R.id.btnAddtoCart);
 
         //set
+        itemSelectedAmount=1;
         title.setText(itemsList.get(itemSelected).getnName());
         expDate.setText(itemsList.get(itemSelected).getdLineDate().toString());
         ivender.setText(itemsList.get(itemSelected).getiVender());
@@ -131,6 +132,10 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         currentPrice.setText( String.valueOf(itemsList.get(itemSelected).getdFinalPrice()));
         amount.setText(String.valueOf(itemSelectedAmount));
+        String imgUrl = itemsList.get(itemSelected).getImgURL();
+
+        Glide.with(mContext).load(imgUrl).into(img);
+
 
         btnMinTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +150,15 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             public void onClick(View view) {
                 itemSelectedAmount++;
                 amount.setText(String.valueOf(itemSelectedAmount));
+            }
+        });
+
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
+                MainActivity.cartList.add(itemsList.get(itemSelected));
+                dialog.dismiss();
             }
         });
 
