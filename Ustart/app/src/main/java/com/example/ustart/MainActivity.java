@@ -110,9 +110,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-              loadItemImg();
+                loadItemImg();
+                loadDesc();
             }
-        }, 2000);
+        }, 1000);
 
 
 
@@ -309,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             LocalDate date2 = LocalDate.of(2022, 7, 6);
 
-                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, ""));
+                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
 
                             Log.d(TAG, "onResponse: "+ipd+nname);
 
@@ -403,6 +404,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String eurl = jsonObject.getString("eurl");
                             Log.d("IMG EURL", eurl);
                             itemsList.get(ii).setImgURL(eurl);
+
+
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            requestQueue.add(stringRequest);
+        }
+
+    }
+
+    private void loadDesc() {
+        for (int idx = 0; idx < itemsList.size(); idx++) {
+            int ipd = itemsList.get(idx).getIpd();
+
+            int ii = idx;
+            String url = URL + "purdCaption?ipd=" + ipd;
+            Log.d("IMG", url);
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+//                    Log.d("IMG", response);
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+//                        Log.d(TAG, jsonArray.toString());
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String ememo = jsonObject.getString("ememo");
+                            Log.d("ememo", ememo);
+                            itemsList.get(ii).setDesc(ememo);
 
 
                         }

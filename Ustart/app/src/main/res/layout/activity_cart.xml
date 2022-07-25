@@ -78,7 +78,7 @@
                     android:id="@+id/taxTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 NT"
+                    android:text="FREE"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="18sp" />

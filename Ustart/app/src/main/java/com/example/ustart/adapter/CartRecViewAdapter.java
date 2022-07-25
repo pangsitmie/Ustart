@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
@@ -40,7 +41,7 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CartRecViewAdapter.ViewHolder holder, int position) {
-//        String imgUrl = itemsList.get(position).get();
+        String imgUrl = cartList.get(position).getImgURL();
         String vender = cartList.get(position).getiVender();
         String itemTitle = cartList.get(position).getnName();
         Double originalPrice = cartList.get(position).getqPrice();
@@ -51,7 +52,7 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = expDate.toString();
 
-        //Glide.with(mContext).load(imgUrl).into(holder.itemImg);
+        Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
         holder.itemPrice.setText(currentPrice +" NT");
         holder.expDate.setText("Exp: "+strDate);
@@ -93,6 +94,8 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
         });
         double totalPrice = currentPrice * cartList.get(position).getqQuantity();
         holder.totalPrice.setText(String.valueOf(totalPrice));
+
+
 
     }
 

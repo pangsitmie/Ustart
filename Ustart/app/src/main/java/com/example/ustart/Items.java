@@ -6,13 +6,13 @@ import java.util.Date;
 
 public class Items {
     int ipd, qQuantity;
-    String iVender, nName, imgURL;
+    String iVender, nName, imgURL, desc;
     ArrayList<String> iType = new ArrayList<>();
     ArrayList<String> iUnit = new ArrayList<>();
     double qPrice, dFinalPrice;
     LocalDate dInDate, dLineDate;
 
-    public Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL) {
+    public Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL, String desc) {
         this.ipd = ipd;
         this.iVender = iVender;
         this.nName = nName;
@@ -24,6 +24,7 @@ public class Items {
         this.dInDate = dInDate;
         this.dLineDate = dLineDate;
         this.imgURL = imgURL;
+        this.desc = desc;
     }
 
 
@@ -121,5 +122,13 @@ public class Items {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

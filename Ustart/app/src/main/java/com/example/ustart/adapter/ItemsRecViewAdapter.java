@@ -53,7 +53,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ItemsRecViewAdapter.ViewHolder holder, int position) {
         String imgUrl = itemsList.get(position).getImgURL();
-        String vender = itemsList.get(position).getiVender();
+        //String vender = itemsList.get(position).getiVender();
         String itemTitle = itemsList.get(position).getnName();
         Double originalPrice = itemsList.get(position).getqPrice();
         Double currentPrice = itemsList.get(position).getdFinalPrice();
@@ -66,14 +66,16 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
+        holder.desc.setText(itemsList.get(position).getDesc());
         holder.currentPrice.setText(currentPrice +" NT");
-        holder.iVender.setText(vender);
+        holder.expDate.setText(strDate);
+
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 itemSelected = holder.getAdapterPosition();
-                Toast.makeText(mContext, itemsList.get(itemSelected).getnName()+"Clickled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, itemsList.get(itemSelected).getnName()+" Selected", Toast.LENGTH_SHORT).show();
                 showDialog(itemSelected);
             }
         });
@@ -91,7 +93,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView parent;
         ImageView itemImg;
-        TextView itemTitle, currentPrice, iVender;
+        TextView itemTitle, currentPrice, expDate, desc;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -99,7 +101,8 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             parent = itemView.findViewById(R.id.parent);
             itemImg = itemView.findViewById(R.id.img);
             itemTitle = itemView.findViewById(R.id.nName);
-            iVender = itemView.findViewById(R.id.expDate);
+            desc = itemView.findViewById(R.id.desc);
+            expDate = itemView.findViewById(R.id.expDate);
             currentPrice = itemView.findViewById(R.id.currentPrice);
         }
     }
@@ -110,6 +113,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         ImageView img = dialog.findViewById(R.id.img);
         TextView title = dialog.findViewById(R.id.title);
+        TextView desc = dialog.findViewById(R.id.desc);
         TextView  ivender= dialog.findViewById(R.id.ivender);
         TextView expDate = dialog.findViewById(R.id.expDate);
         TextView originalPrice = dialog.findViewById(R.id.qPrice);
@@ -122,6 +126,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         //set
         itemSelectedAmount=1;
         title.setText(itemsList.get(itemSelected).getnName());
+        desc.setText(itemsList.get(itemSelected).getDesc());
         expDate.setText(itemsList.get(itemSelected).getdLineDate().toString());
         ivender.setText(itemsList.get(itemSelected).getiVender());
 //        originalPrice.setText( );
