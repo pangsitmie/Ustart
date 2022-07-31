@@ -56,6 +56,14 @@ Namespace Controllers
             Dim pwd As String = value.pwd
             Dim name As String = value.name
             Dim sex As String = value.sex
+            Dim birthday As String = String.Empty
+
+            Try
+                birthday = IIf(value.birthday.ToString.Trim = "", "", Format(CDate(value.birthday.ToString), "yyyy-MM-dd"))
+            Catch ex As Exception
+                birthday = ""
+            End Try
+
             Dim phone As String = value.phone
             Dim email As String = value.email
 
@@ -81,12 +89,13 @@ Namespace Controllers
             member.icode = pwd
             member.nname = name
             member.isex = sex
+            member.birthday = birthday
             member.ephone = phone
             member.eemail = email
             member.qpoint = 0
             member.dlogin = Format(Now, "yyyy-MM-dd HH:mm:ss")
             members.Add(member)
-            s = "INSERT INTO `project`.`member` (`iuid`, `icode`, `nname`, `isex`, `ephone`, `eemail`, `qpoint`, `dlogin`) VALUES (@iuid, @icode, @nname, @isex, @ephone, @eemail, @qpoint, @dlogin);"
+            s = "INSERT INTO `project`.`member` (`iuid`, `icode`, `nname`, `isex`, `birthday`, `ephone`, `eemail`, `qpoint`, `dlogin`) VALUES (@iuid, @icode, @nname, @isex, @birthday, @ephone, @eemail, @qpoint, @dlogin);"
             conn.oConn.Execute(s, members)
 
             feedback.rid = 1
@@ -132,6 +141,7 @@ Public Class signup
     Public Property pwd As String
     Public Property name As String
     Public Property sex As Integer
+    Public Property birthday As String
     Public Property phone As String
     Public Property email As String
 End Class

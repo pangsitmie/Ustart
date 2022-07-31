@@ -6,7 +6,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\jerie\Documents\GitHub\Ustart\Back-end\project\bin\Release\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\s9212\source\repos\project\project\bin\Release\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/BouncyCastle.Crypto.dll">
@@ -37,13 +37,13 @@
       <publishTime>02/18/2018 09:44:54</publishTime>
     </File>
     <File Include="bin/project.dll">
-      <publishTime>07/03/2022 19:27:33</publishTime>
+      <publishTime>07/03/2022 19:36:10</publishTime>
     </File>
     <File Include="bin/project.pdb">
-      <publishTime>07/03/2022 19:27:33</publishTime>
+      <publishTime>07/03/2022 19:36:10</publishTime>
     </File>
     <File Include="bin/project.xml">
-      <publishTime>07/03/2022 19:27:33</publishTime>
+      <publishTime>07/03/2022 19:36:10</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 13:38:22</publishTime>
@@ -211,13 +211,13 @@
       <publishTime>03/30/2022 09:07:38</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>05/29/2022 10:12:56</publishTime>
+      <publishTime>05/29/2022 10:12:54</publishTime>
     </File>
     <File Include="HtmlPage1.html">
       <publishTime>06/18/2022 19:14:16</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/03/2022 19:27:33</publishTime>
+      <publishTime>07/03/2022 18:54:43</publishTime>
     </File>
   </ItemGroup>
 </Project>
