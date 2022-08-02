@@ -163,6 +163,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             public void onClick(View view) {
                 itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
                 MainActivity.cartList.add(itemsList.get(itemSelected));
+                MainActivity.checkCartCount();
                 dialog.dismiss();
             }
         });

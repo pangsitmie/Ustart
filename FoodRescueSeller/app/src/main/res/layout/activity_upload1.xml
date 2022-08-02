@@ -4,15 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".views.RegisterFragment">
+    tools:context=".UploadActivity1">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="45dp" />
 
 
     <!--Name-->
@@ -23,53 +16,38 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:text="Create Account"
+        android:layout_marginTop="20dp"
+        android:text="Upload your product"
         android:textColor="@color/green_4"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="40dp"
-        android:text="Please sign in to continue"
-        android:textAlignment="textStart"
-        android:textColor="@color/green_3"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView6"
-        app:layout_constraintStart_toStartOf="@+id/textView6"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/nnameET"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/round_square_button"
         android:backgroundTint="@color/card_color"
         android:drawableLeft="@drawable/ic_at"
         android:drawablePadding="10dp"
         android:drawableTint="@color/green_3"
-        android:hint="username"
+        android:hint="Product name"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintHorizontal_bias="0.185"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
         android:id="@+id/qpriceET"
@@ -80,10 +58,11 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/round_square_button"
         android:backgroundTint="@color/card_color"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_money"
         android:drawablePadding="10dp"
+        android:inputType="number"
         android:drawableTint="@color/green_3"
-        android:hint="Full Name"
+        android:hint="Original price"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -103,12 +82,12 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/round_square_button"
         android:backgroundTint="@color/card_color"
-        android:drawableLeft="@drawable/ic_mail"
+        android:drawableLeft="@drawable/ic_money"
         android:drawablePadding="10dp"
         android:drawableTint="@color/green_3"
-        android:hint="Email"
+        android:hint="Final price"
         android:padding="10dp"
-        android:inputType="textEmailAddress"
+        android:inputType="number"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/qpriceET"
@@ -126,11 +105,11 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/round_square_button"
         android:backgroundTint="@color/card_color"
-        android:drawableLeft="@drawable/ic_password"
+        android:drawableLeft="@drawable/ic_quantity"
         android:drawablePadding="10dp"
         android:drawableTint="@color/green_3"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="Quantity"
+        android:inputType="number"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -138,7 +117,7 @@
         app:layout_constraintStart_toStartOf="@+id/finalPriceET"
         app:layout_constraintTop_toBottomOf="@+id/finalPriceET" />
 
-    <EditText
+    <TextView
         android:id="@+id/dindateTV"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -147,11 +126,10 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/round_square_button"
         android:backgroundTint="@color/card_color"
-        android:drawableLeft="@drawable/ic_password"
+        android:drawableLeft="@drawable/ic_date"
         android:drawablePadding="10dp"
         android:drawableTint="@color/green_3"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
+        android:hint="Product in date"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -171,7 +149,7 @@
         android:drawableLeft="@drawable/ic_date"
         android:drawablePadding="10dp"
         android:drawableTint="@color/green_3"
-        android:hint="Date of Birth"
+        android:hint="Expire date"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -179,109 +157,110 @@
         app:layout_constraintStart_toStartOf="@+id/dindateTV"
         app:layout_constraintTop_toBottomOf="@+id/dindateTV" />
 
-    <EditText
-        android:id="@+id/itypeSpinner"
+    <FrameLayout
+        android:id="@+id/typeFrame"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/spinner_bg"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/round_square_button"
-        android:backgroundTint="@color/card_color"
-        android:drawableLeft="@drawable/ic_phone"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/green_3"
-        android:hint="Phone Number"
-        android:inputType="number"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/dlinedateTV"
         app:layout_constraintStart_toStartOf="@+id/dlinedateTV"
-        app:layout_constraintTop_toBottomOf="@+id/dlinedateTV" />
+        app:layout_constraintTop_toBottomOf="@+id/dlinedateTV">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="45dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itypeSpinner">
+        <Spinner
+            android:id="@+id/itypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    </FrameLayout>
 
-        <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male"
-            android:textColor="@color/blue"
-            android:layout_marginRight="5dp"/>
+<!--    <Spinner-->
+<!--        android:id="@+id/itypeSpinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:background="@drawable/round_square_button"-->
+<!--        android:backgroundTint="@color/card_color"-->
+<!--        android:drawableLeft="@drawable/ic_products"-->
+<!--        android:drawablePadding="10dp"-->
+<!--        android:drawableTint="@color/green_3"-->
+<!--        android:hint="Type"-->
+<!--        android:inputType="number"-->
+<!--        android:padding="10dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/dlinedateTV"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/dlinedateTV"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/dlinedateTV" />-->
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female"
-            android:textColor="@color/red" />
 
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/btnConfirm"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/spinner_bg"
+        app:layout_constraintEnd_toEndOf="@+id/typeFrame"
+        app:layout_constraintStart_toStartOf="@+id/typeFrame"
+        app:layout_constraintTop_toBottomOf="@+id/typeFrame">
+
+        <Spinner
+            android:id="@+id/iunitSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:spinnerMode="dropdown" />
+    </FrameLayout>
+<!--    <Spinner-->
+<!--        android:id="@+id/iunitSpinner"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="45dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_marginRight="40dp"-->
+<!--        android:background="@drawable/round_square_button"-->
+<!--        android:backgroundTint="@color/card_color"-->
+<!--        android:drawableLeft="@drawable/ic_products"-->
+<!--        android:drawablePadding="10dp"-->
+<!--        android:drawableTint="@color/green_3"-->
+<!--        android:hint="Unit"-->
+<!--        android:inputType="number"-->
+<!--        android:padding="10dp"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="14sp"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/itypeSpinner"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/itypeSpinner"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/itypeSpinner" />-->
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/round_button"
         android:backgroundTint="@color/green_4"
-        android:minHeight="60dp"
-        android:text="Sign Up"
+        android:minHeight="50dp"
+        android:text="Next"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/dindateTV"
-        app:layout_constraintStart_toStartOf="@+id/dindateTV"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="Already have an account?"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnConfirm"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/signInTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="Sign In"
-        android:textAlignment="textStart"
-        android:textColor="@color/green_3"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -42,6 +44,7 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ImageView toolbarIcon, cartIcon;
     private TextView toolbarTitle;
+    public static TextView cartCount;
+    public static CardView cartCountCV;
+
     public static ArrayList<Items> itemsList = new ArrayList<Items>();
     public static ArrayList<Items> cartList = new ArrayList<Items>();
     private ProgressDialog dialog;
@@ -97,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         drawer = findViewById(R.id.drawer_layout);
         cartIcon = findViewById(R.id.shoppingCartIcon);
+        cartCountCV = findViewById(R.id.cartCountCV);
+        cartCount = findViewById(R.id.cartCount);
+
 
 //        navController = Navigation.findNavController(this, R.id.nav_view);
 
@@ -141,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-
+        cartCount.setText(String.valueOf(cartList.size()));
+        checkCartCount();
     }
 
     //DRAWER NAV LISTENER
@@ -190,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
     //bottom nav listener
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -225,7 +234,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
             };
-
 
     private void getExploreData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -346,42 +354,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog.dismiss();
     }
 
-    private void getItemImg(int itemIdx) {
-        String url1 = URL + "purdPic?ipd=" + itemIdx;
-        Log.d("getimgURL fun", itemIdx + " - " + url1);
-
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        //purdPic  API
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url1, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    // Loop through the array elements
-                    for (int i = 0; i < response.length(); i++) {
-                        // Get current json object
-                        JSONObject item = response.getJSONObject(i);
-
-                        int ipd = Integer.parseInt(item.getString("ipd"));
-                        String type = item.getString("itype");
-                        String imgURL = item.getString("eurl");
-                        itemsList.get(itemIdx).setImgURL(imgURL);
-
-                        Log.d("getimgURL", imgURL);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
-    }
-
     private void loadItemImg() {
         for (int idx = 0; idx < itemsList.size(); idx++) {
             int ipd = itemsList.get(idx).getIpd();
@@ -462,5 +434,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             requestQueue.add(stringRequest);
         }
 
+    }
+
+    public static void checkCartCount(){
+        if(cartList.size()==0){
+            cartCountCV.setVisibility(View.GONE);
+        }
+        else{
+            cartCountCV.setVisibility(View.VISIBLE);
+            cartCount.setText(String.valueOf(cartList.size()));
+        }
     }
 }

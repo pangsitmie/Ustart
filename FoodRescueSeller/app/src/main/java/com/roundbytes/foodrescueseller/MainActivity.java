@@ -29,10 +29,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageView toolbarIcon;
     private TextView toolbarTitle;
 
+    public static String URL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        URL = getString(R.string.API_URL);
 
         //disable application icon from ActionBar
 
@@ -130,8 +134,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_upload:
-                            /*selectedFragment = new StocksFragment();*/
-                            Toast.makeText(getApplicationContext(), "Stay tune for the next update", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), UploadActivity1.class);
+                            startActivity(intent);
+//                            selectedFragment = new UploadFragment();
+//                            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_order:
                             selectedFragment = new MarketFragment();

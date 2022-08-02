@@ -1,0 +1,1243 @@
+{
+	"info": {
+		"_postman_id": "20fc938a-0f43-4d98-a677-04b1cb899bbd",
+		"name": "project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uid",
+							"value": "user123",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "test123",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "方義順",
+							"type": "text"
+						},
+						{
+							"key": "sex",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "0987654321",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/signup",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "uid",
+							"value": "user123",
+							"type": "text"
+						},
+						{
+							"key": "pwd",
+							"value": "test123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdType",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nname",
+							"value": "泡麵類",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "泡麵類",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdType"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdType",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdType"
+					],
+					"query": [
+						{
+							"key": "itype",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdType",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdType?itype=2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdType"
+					],
+					"query": [
+						{
+							"key": "itype",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdType",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "itype",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "nname",
+							"value": "泡麵類",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "常吃泡麵對身體有害",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdType?itype=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdType"
+					],
+					"query": [
+						{
+							"key": "itype",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdPic",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345",
+							"type": "text"
+						},
+						{
+							"key": "eurl",
+							"value": "某個地方",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdPic",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdPic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdPic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdPic?ipd=A001",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdPic"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "美女大全",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdPic",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdPic?ipd=A001&itype=清涼寫真集12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdPic"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdPic",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "美女大全",
+							"type": "text"
+						},
+						{
+							"key": "eurl",
+							"value": "http://www.cnu.edu.tw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdPic?ipd=A001&itype=清涼寫真集12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdPic"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdCaption",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "清涼寫真集12345666",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdCaption",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdCaption"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdCaption",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdCaption?ipd=A001",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdCaption"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdCaption",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdCaption?ipd=A001&itype=清涼寫真集12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdCaption"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdCaption",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "美女大全",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "http://www.cnu.edu.tw",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdCaption?ipd=A001&itype=清涼寫真集12345",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdCaption"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "A001"
+						},
+						{
+							"key": "itype",
+							"value": "清涼寫真集12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vender",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ivender",
+							"value": "A002",
+							"type": "text"
+						},
+						{
+							"key": "nname",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "nman",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "eemail",
+							"value": "test@test.com",
+							"type": "text"
+						},
+						{
+							"key": "ephone",
+							"value": "0987654321",
+							"type": "text"
+						},
+						{
+							"key": "eaddress",
+							"value": "here",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/vender",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"vender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vender",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/vender",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"vender"
+					],
+					"query": [
+						{
+							"key": "ivender",
+							"value": "A001",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vender",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/vender?ivender=A002",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"vender"
+					],
+					"query": [
+						{
+							"key": "ivender",
+							"value": "A002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vender",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ivender",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "nname",
+							"value": "test55666",
+							"type": "text"
+						},
+						{
+							"key": "nman",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "eemail",
+							"value": "test@test.com",
+							"type": "text"
+						},
+						{
+							"key": "ephone",
+							"value": "0987654321",
+							"type": "text"
+						},
+						{
+							"key": "eaddress",
+							"value": "here",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/vender?ivender=A001",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"vender"
+					],
+					"query": [
+						{
+							"key": "ivender",
+							"value": "A001"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ivender",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "nname",
+							"value": "科學麵",
+							"type": "text"
+						},
+						{
+							"key": "qprice",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "qquantity",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "1,2,3",
+							"type": "text"
+						},
+						{
+							"key": "iunit",
+							"value": "1,2,3",
+							"type": "text"
+						},
+						{
+							"key": "dindate",
+							"value": "2022-06-25 10:30:00",
+							"type": "text"
+						},
+						{
+							"key": "dlinedate",
+							"value": "2022-10-25 10:30:00",
+							"type": "text"
+						},
+						{
+							"key": "dfinalprice",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdData",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdData"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdData?ipd=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdData"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdData",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ivender",
+							"value": "A001",
+							"type": "text"
+						},
+						{
+							"key": "nname",
+							"value": "模範生點心麵",
+							"type": "text"
+						},
+						{
+							"key": "qprice",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "qquantity",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "itype",
+							"value": "1,2,3",
+							"type": "text"
+						},
+						{
+							"key": "iunit",
+							"value": "1,2,3",
+							"type": "text"
+						},
+						{
+							"key": "dindate",
+							"value": "2022-06-25 10:30:00",
+							"type": "text"
+						},
+						{
+							"key": "dlinedate",
+							"value": "2022-10-25 10:30:00",
+							"type": "text"
+						},
+						{
+							"key": "dfinalprice",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdData?ipd=1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdData"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdData",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdData?ipd=11",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdData"
+					],
+					"query": [
+						{
+							"key": "ipd",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdStatus",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "istatus",
+							"value": "T",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project//api/purdStatus",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"",
+						"api",
+						"purdStatus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdUnit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nname",
+							"value": "NTD",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "新台幣",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:58770/api/purdUnit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58770",
+					"path": [
+						"api",
+						"purdUnit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdUnit",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nname",
+							"value": "ML",
+							"type": "text"
+						},
+						{
+							"key": "ememo",
+							"value": "公升",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:58770/api/purdUnit?iunit=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58770",
+					"path": [
+						"api",
+						"purdUnit"
+					],
+					"query": [
+						{
+							"key": "iunit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdUnit",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:58770/api/purdUnit?iunit=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58770",
+					"path": [
+						"api",
+						"purdUnit"
+					],
+					"query": [
+						{
+							"key": "iunit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdUnit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:58770/api/purdUnit?iunit=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "58770",
+					"path": [
+						"api",
+						"purdUnit"
+					],
+					"query": [
+						{
+							"key": "iunit",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "purdSearch",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ipd",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "ivender",
+							"value": "A001",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "nname",
+							"value": "麵",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "qprice",
+							"value": "1.5,10.9",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "itype",
+							"value": "1,2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "dindate",
+							"value": "2022-05-25 10:30:00,2022-10-25 10:30:00",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "dlinedate",
+							"value": " 2022-05-25 10:30:00, 2022-12-25 10:30:00",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/purdSearch",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"purdSearch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "viewLog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "iacc",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "ipd",
+							"value": "6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1/project/api/viewLog",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"path": [
+						"project",
+						"api",
+						"viewLog"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

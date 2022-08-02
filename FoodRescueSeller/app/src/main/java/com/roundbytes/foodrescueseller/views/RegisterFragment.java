@@ -70,13 +70,13 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        uidET = view.findViewById(R.id.uidET);
-        nameET = view.findViewById(R.id.nameET);
-        emailET = view.findViewById(R.id.emailET);
-        passwordET = view.findViewById(R.id.passwordET);
-        passwordConfirmET = view.findViewById(R.id.passwordConfirmET);
-        dateTV = view.findViewById(R.id.dateTV);
-        phoneET = view.findViewById(R.id.phoneET);
+        uidET = view.findViewById(R.id.nnameET);
+        nameET = view.findViewById(R.id.qpriceET);
+        emailET = view.findViewById(R.id.finalPriceET);
+        passwordET = view.findViewById(R.id.quanitityET);
+        passwordConfirmET = view.findViewById(R.id.dindateTV);
+        dateTV = view.findViewById(R.id.dlinedateTV);
+        phoneET = view.findViewById(R.id.itypeSpinner);
 
         radioGroup = view.findViewById(R.id.radioGroup);
         // get selected radio button from radioGroup

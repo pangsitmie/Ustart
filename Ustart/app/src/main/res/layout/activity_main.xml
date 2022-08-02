@@ -48,16 +48,53 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/shoppingCartIcon"
+<!--                notification icon-->
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="25dp"
-                    android:src="@drawable/shopping_bag"
-                    app:tint="@color/green_4" />
+                    android:layout_marginBottom="25dp">
+
+                    <ImageView
+                        android:id="@+id/shoppingCartIcon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/shopping_bag"
+                        app:tint="@color/green_4" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cartCountCV"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:cardBackgroundColor="@color/green_4"
+                        app:cardCornerRadius="20dp"
+                        app:layout_constraintEnd_toEndOf="@+id/shoppingCartIcon"
+                        app:layout_constraintTop_toTopOf="@+id/shoppingCartIcon"
+                        android:visibility="visible">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/cartCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textColor="@color/white_grey"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
 

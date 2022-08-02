@@ -43,9 +43,9 @@
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.roundbytes.foodrescueseller.views.HistoryFragment"
+        android:name="com.roundbytes.foodrescueseller.views.UploadFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" >
+        tools:layout="@layout/fragment_upload" >
         <action
             android:id="@+id/action_historyFragment_to_exploreFragment"
             app:destination="@id/exploreFragment" />

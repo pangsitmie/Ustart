@@ -26,6 +26,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roundbytes.foodrescueseller.MainActivity;
 import com.roundbytes.foodrescueseller.R;
+import com.roundbytes.foodrescueseller.SaveSharedPreference;
+import com.roundbytes.foodrescueseller.WelcomeActivity;
 
 import org.json.JSONObject;
 
@@ -40,7 +42,7 @@ public class SignInFragment extends Fragment {
 //    private AuthViewModel authViewModel;
     private NavController navController;
 
-    final String url = "http://192.168.1.3/ustart/api/login";
+    String url = WelcomeActivity.URL + "login";
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +59,8 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        uidET = view.findViewById(R.id.uidET);
-        passwordET = view.findViewById(R.id.passwordET);
+        uidET = view.findViewById(R.id.nnameET);
+        passwordET = view.findViewById(R.id.quanitityET);
         btnConfirm = view.findViewById(R.id.btnConfirm);
 
         navController = Navigation.findNavController(view);
@@ -100,6 +102,7 @@ public class SignInFragment extends Fragment {
 
                     if(rid.equals("1")){
                         Toast.makeText(getContext(), "Sing In Success", Toast.LENGTH_SHORT).show();
+                        SaveSharedPreference.setUID(getContext(), uid);
                         Intent login = new Intent(getContext(), MainActivity.class);
                         startActivity(login);
                     }

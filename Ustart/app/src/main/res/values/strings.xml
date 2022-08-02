@@ -10,7 +10,7 @@
     <string name="title_place_holder">Title Place Holder</string>
 
 
-    <string name="API_URL">http://192.168.1.8/ustart/api/</string>
+    <string name="API_URL">http://192.168.1.4/ustart/api/</string>
 
 
 </resources>

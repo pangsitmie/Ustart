@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Food Rescue Seller</string>
+    <string name="app_name">Foodable Seller</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,4 +7,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cover" />
     <string name="title_place_holder">Title Place Holder</string>
+
+    <string name="API_URL">http://192.168.1.4/ustart/api/</string>
+
 </resources>
