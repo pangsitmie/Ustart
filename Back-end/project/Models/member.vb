@@ -4,6 +4,7 @@
     Public Property icode As String
     Public Property nname As String
     Public Property isex As Integer
+    Public Property birthday As String
     Public Property ephone As String
     Public Property eemail As String
     Public Property qpoint As Double

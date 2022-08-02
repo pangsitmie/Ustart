@@ -7,6 +7,7 @@ CREATE TABLE `project`.`member` (
     `icode` varchar(20) not null,
     `nname` varchar(20) not null,
     `isex` int(2) not null,
+    `birthday` date not null,
     `ephone` varchar(20) not null,
     `eemail` varchar(50) not null,
     `qpoint` float not null,
@@ -104,8 +105,31 @@ create table `view_log`(
 create table `purd_car`(
   `id` INT NOT NULL AUTO_INCREMENT,
   `iacc` varchar(255) not null,
-  `ipid` varchar(255) not null,
+  `ipd` varchar(255) not null,
   `qquantity` int not null,
+  `dchgdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `istatus` char(1) NOT NULL DEFAULT 'T',
   PRIMARY KEY (`id`)
+);
+
+--  insert into purd_car (iacc,ipd,qquantity) values (1,1,10);
+
+ 
+create table `order_data`(
+`iorder` INT NOT NULL AUTO_INCREMENT,
+`istatus` int(10) not null,
+`dchgdate` date not null,
+`dadddate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+PRIMARY KEY (`iorder`)
+);
+
+create table `order_detail`(
+`iacc` varchar(255) not null,
+`iorder` varchar(255) not null,
+`ipd` varchar(255) not null,
+`qquantity` int not null,
+`qprice` float not null,
+`ememo` text,
+`dchgdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+index(`iacc`,`iorder`,`ipd`)
 );

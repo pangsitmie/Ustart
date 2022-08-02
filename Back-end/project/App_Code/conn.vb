@@ -10,7 +10,7 @@ Public Class conn
 
     Sub New(ByVal DB$)
 
-        sConnStr = String.Format("server=localhost;user=root;database={0};port=3306;password=Project3306", DB)
+        sConnStr = String.Format("server=localhost;user=root;database={0};port=3306;password=Project3306!", DB)
 
         Try
             oConn = New MySqlConnection(sConnStr)
