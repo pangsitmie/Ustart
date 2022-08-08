@@ -25,6 +25,9 @@ import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
+import com.example.ustart.data.CartEntity;
+import com.example.ustart.data.FooadableDao;
+import com.example.ustart.data.ItemEntity;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -161,6 +164,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
                 MainActivity.cartList.add(itemsList.get(itemSelected));
                 MainActivity.checkCartCount();
@@ -175,5 +179,9 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
+    }
+
+    public interface OnItemAddToCartCallBack{
+        void onItemClicked(ItemEntity data);
     }
 }

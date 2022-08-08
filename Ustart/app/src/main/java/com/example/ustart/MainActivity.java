@@ -376,8 +376,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String eurl = jsonObject.getString("eurl");
                             Log.d("IMG EURL", eurl);
                             itemsList.get(ii).setImgURL(eurl);
-
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
