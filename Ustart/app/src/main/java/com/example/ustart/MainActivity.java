@@ -35,6 +35,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ustart.data.FoodableDatabase;
+import com.example.ustart.data.entity.ItemEntity;
 import com.example.ustart.views.ExploreFragment;
 import com.example.ustart.views.HomeFragment;
 import com.example.ustart.views.MarketFragment;
@@ -72,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String TAG = "response";
 
-    public int idx = 0;
+
+    private FoodableDatabase database;
 
 
 //    private NavController navController;
@@ -105,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cartIcon = findViewById(R.id.shoppingCartIcon);
         cartCountCV = findViewById(R.id.cartCountCV);
         cartCount = findViewById(R.id.cartCount);
+//        Initialize database
+        database = FoodableDatabase.getInstance(getApplicationContext());
 
 
 //        navController = Navigation.findNavController(this, R.id.nav_view);
@@ -289,6 +294,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getDataByType(String iTypeIdx) {
+
+
         String url = URL + "purdSearch";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -317,8 +324,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                             LocalDate date2 = LocalDate.of(2022, 7, 6);
+                            String dateStr = date2.toString();
 
-                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
+                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
+                            database.fooadableDao().insertItemEntity(itemEntity);
+                            //itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
 
                             Log.d(TAG, "onResponse: "+ipd+nname);
 

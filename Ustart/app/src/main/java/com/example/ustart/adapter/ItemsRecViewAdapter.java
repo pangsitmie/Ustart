@@ -25,19 +25,16 @@ import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
-import com.example.ustart.data.CartEntity;
-import com.example.ustart.data.FooadableDao;
-import com.example.ustart.data.ItemEntity;
+import com.example.ustart.data.entity.ItemEntity;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapter.ViewHolder> {
 
     private static final String TAG = "ItemsRecViewAdapter";
     private Context mContext;
-    private ArrayList<Items> itemsList = new ArrayList<>();
+    private ArrayList<ItemEntity> itemsList = new ArrayList<>();
     private int itemSelected;
     int itemSelectedAmount =1;
     private static final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
@@ -61,7 +58,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Double originalPrice = itemsList.get(position).getqPrice();
         Double currentPrice = itemsList.get(position).getdFinalPrice();
 //        String desc = itemsList.get(position).getDesc();
-        LocalDate expDate = itemsList.get(position).getdLineDate();
+        String expDate = itemsList.get(position).getdLineDate();
         int quantity = itemsList.get(position).getqQuantity();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -89,7 +86,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         return itemsList.size();
     }
 
-    public void setItemsList(ArrayList<Items> itemsList) {
+    public void setItemsList(ArrayList<ItemEntity> itemsList) {
         this.itemsList = itemsList;
     }
 
@@ -161,16 +158,16 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             }
         });
 
-        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
-                MainActivity.cartList.add(itemsList.get(itemSelected));
-                MainActivity.checkCartCount();
-                dialog.dismiss();
-            }
-        });
+//        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
+//                MainActivity.cartList.add(itemsList.get(itemSelected));
+//                MainActivity.checkCartCount();
+//                dialog.dismiss();
+//            }
+//        });
 
 
         dialog.show();

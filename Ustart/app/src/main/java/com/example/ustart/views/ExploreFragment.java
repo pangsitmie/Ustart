@@ -14,38 +14,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.adapter.ItemsRecViewAdapter;
 import com.example.ustart.R;
+import com.example.ustart.data.FoodableDatabase;
+import com.example.ustart.data.entity.CartEntity;
+import com.example.ustart.data.entity.ItemEntity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ExploreFragment extends Fragment {
     private RecyclerView recView;
     private ItemsRecViewAdapter adapter;
     public static ArrayList<Items> items = new ArrayList<Items>();
+    private FoodableDatabase database;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,10 +48,12 @@ public class ExploreFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recView = view.findViewById(R.id.itemsRecView);
+        database = FoodableDatabase.getInstance(getContext());
 
         adapter = new ItemsRecViewAdapter(getActivity());
         //uses itemlist from main activity
-        adapter.setItemsList(MainActivity.itemsList);
+        //adapter.setItemsList(MainActivity.itemsList);
+        adapter.setItemsList(database.fooadableDao().getAllItems());
 
         for (int i=0;i< MainActivity.itemsList.size();i++)
         {
@@ -79,4 +65,8 @@ public class ExploreFragment extends Fragment {
         recView.setAdapter(adapter);
 
     }
+//    @Override
+//    public void onItemClicked(ItemEntity data) {
+//        CartEntity cartEntity = new CartEntity("masukkan parameter")
+//    }
 }

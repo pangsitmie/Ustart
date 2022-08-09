@@ -9,12 +9,8 @@ import android.widget.TextView;
 
 import com.example.ustart.adapter.CartRecViewAdapter;
 import com.example.ustart.adapter.ItemsRecViewAdapter;
-import com.example.ustart.data.CartEntity;
-import com.example.ustart.data.ItemEntity;
 
-import java.util.ArrayList;
-
-public class CartActivity extends AppCompatActivity implements ItemsRecViewAdapter.OnItemAddToCartCallBack{
+public class CartActivity extends AppCompatActivity {
     private RecyclerView recView;
     private CartRecViewAdapter adapter;
     private TextView itemsTotalTV, taxTV;
@@ -54,8 +50,5 @@ public class CartActivity extends AppCompatActivity implements ItemsRecViewAdapt
         return  totalCartValue;
     }
 
-    @Override
-    public void onItemClicked(ItemEntity data) {
-        CartEntity cartEntity = new CartEntity("masukkan parameter")
-    }
+
 }

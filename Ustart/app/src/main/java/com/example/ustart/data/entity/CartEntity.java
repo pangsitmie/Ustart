@@ -1,14 +1,19 @@
-package com.example.ustart.data;
+package com.example.ustart.data.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "itementities")
-public class ItemEntity {
-    @PrimaryKey
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+@Entity(tableName = "cartentities")
+public class CartEntity {
+    @PrimaryKey(autoGenerate = true)
     @NonNull
+    @ColumnInfo(name = "id")
+    private int id;
     @ColumnInfo(name = "ipd")
     private int ipd;
     @ColumnInfo(name = "qQuantity")
@@ -28,7 +33,7 @@ public class ItemEntity {
     @ColumnInfo(name = "dFinalPrice")
     private String dFinalPrice;
 
-    public ItemEntity(int id, int ipd, int qQuantity, String iVender, String nName, String imgURL, String desc, String qPrice, String dSellPrice, String dFinalPrice) {
+    public CartEntity(int ipd, int qQuantity, String iVender, String nName, String imgURL, String desc, String qPrice, String dSellPrice, String dFinalPrice) {
         this.ipd = ipd;
         this.qQuantity = qQuantity;
         this.iVender = iVender;
@@ -38,6 +43,14 @@ public class ItemEntity {
         this.qPrice = qPrice;
         this.dSellPrice = dSellPrice;
         this.dFinalPrice = dFinalPrice;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIpd() {
