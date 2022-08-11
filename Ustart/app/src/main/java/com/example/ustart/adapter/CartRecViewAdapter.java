@@ -7,30 +7,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.ustart.Items;
-import com.example.ustart.MainActivity;
 import com.example.ustart.R;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import com.example.ustart.database.entity.CartEntity;
+
 import java.util.ArrayList;
 
 public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.ViewHolder> {
 
     private static final String TAG = "CartRecViewAdapter";
     private Context mContext;
-    private ArrayList<Items> cartList = new ArrayList<>();
+    private ArrayList<CartEntity> data;
 
     //constructor
-    public CartRecViewAdapter(Context mContext) {
-        this.mContext = mContext;
+    public CartRecViewAdapter(ArrayList<CartEntity> data) {
+        this.data = data;
     }
     @NonNull
     @Override
@@ -41,72 +38,17 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CartRecViewAdapter.ViewHolder holder, int position) {
-        String imgUrl = cartList.get(position).getImgURL();
-        String vender = cartList.get(position).getiVender();
-        String itemTitle = cartList.get(position).getnName();
-        Double originalPrice = cartList.get(position).getqPrice();
-        Double currentPrice = cartList.get(position).getdFinalPrice();
-        LocalDate expDate = cartList.get(position).getdLineDate();
-        int quantity = cartList.get(position).getqQuantity();
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = expDate.toString();
-
-        Glide.with(mContext).load(imgUrl).into(holder.itemImg);
-        holder.itemTitle.setText(itemTitle);
-        holder.itemPrice.setText(currentPrice +" NT");
-        holder.expDate.setText("Exp: "+strDate);
-        holder.qQuantity.setText(String.valueOf(quantity));
-        holder.iVender.setText(vender);
-
-        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String ipd =String.valueOf(cartList.get(position).getIpd());
-                for (int i=0;i<MainActivity.cartList.size();i++){
-                    String checkIpd =String.valueOf(MainActivity.cartList.get(i).getIpd());
-                    if(ipd.equals(checkIpd)){
-                        MainActivity.cartList.get(i).addQuantity();
-                        int tempQty = MainActivity.cartList.get(i).getqQuantity();
-                        cartList.get(position).setqQuantity(tempQty);
-                        holder.qQuantity.setText(String.valueOf(tempQty));
-                        Toast.makeText(mContext,String.valueOf(tempQty) , Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-
-        holder.btnMin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String ipd =String.valueOf(cartList.get(position).getIpd());
-                for (int i=0;i<MainActivity.cartList.size();i++){
-                    String checkIpd =String.valueOf(MainActivity.cartList.get(i).getIpd());
-                    if(ipd.equals(checkIpd)){
-                        MainActivity.cartList.get(i).minQuantity();
-                        int tempQty = MainActivity.cartList.get(i).getqQuantity();
-                        cartList.get(position).setqQuantity(tempQty);
-                        holder.qQuantity.setText(String.valueOf(tempQty));
-                        Toast.makeText(mContext,String.valueOf(tempQty) , Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-        double totalPrice = currentPrice * cartList.get(position).getqQuantity();
-        holder.totalPrice.setText(String.valueOf(totalPrice));
-
-
-
+        CartEntity cartEntity = data.get(position);
+        holder.bind(cartEntity);
     }
-
     @Override
     public int getItemCount() {
-        return cartList.size();
+        return data.size();
     }
 
-    public void setCartList(ArrayList<Items> cartList) {
-        this.cartList = cartList;
-    }
+//    public void setCartList(ArrayList<CartEntity> cartList) {
+//        this.cartList = cartList;
+//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView parent;
@@ -127,8 +69,18 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
             expDate = itemView.findViewById(R.id.expTV);
             btnAdd = itemView.findViewById(R.id.btnAdd);
             btnMin = itemView.findViewById(R.id.btnMin);
+        }
+        void bind(CartEntity cartEntity) {
+            itemTitle.setText(String.valueOf(cartEntity.getName()));
+            iVender.setText(String.valueOf(cartEntity.getIvender()));
+            itemPrice.setText(String.valueOf(cartEntity.getPrice()));
+            qQuantity.setText(String.valueOf(cartEntity.getQquantity()));
+            expDate.setText(String.valueOf(cartEntity.getExpdate()));
+            qQuantity.setText(String.valueOf(cartEntity.getQquantity()));
+            Glide.with(parent.getContext()).load(cartEntity.getImgURL()).into(itemImg);
 
         }
+
     }
 //    public void showDialog(){
 //        final Dialog dialog = new Dialog(mContext);

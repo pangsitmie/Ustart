@@ -66,7 +66,7 @@ public class RegisterFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private NavController navController;
 
-    final String url = R.string.API_URL + "signup";
+    public static String URL;
     private String tempSex ="0";
 
 
@@ -83,6 +83,8 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        URL = getString(R.string.API_URL) + "signup";
 
         uidET = view.findViewById(R.id.uidET);
         nameET = view.findViewById(R.id.nameET);
@@ -225,7 +227,7 @@ public class RegisterFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("anyText", response);
@@ -263,6 +265,14 @@ public class RegisterFragment extends Fragment {
                 params.put("date", date);
                 params.put("phone", phone);
                 params.put("sex", sex);
+
+                params.put("uid", uid);
+                params.put("icode", pwd);
+                params.put("nname", name);
+                params.put("isex", sex);
+                params.put("birthday", date);
+                params.put("ephone", phone);
+                params.put("eemail", email);
 
                 return params;
             }

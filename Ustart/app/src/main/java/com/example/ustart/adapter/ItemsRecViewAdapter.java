@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -25,19 +26,25 @@ import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
-import com.example.ustart.data.entity.ItemEntity;
+import com.example.ustart.database.AppDatabase;
+import com.example.ustart.database.entity.CartEntity;
+
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapter.ViewHolder> {
 
     private static final String TAG = "ItemsRecViewAdapter";
     private Context mContext;
-    private ArrayList<ItemEntity> itemsList = new ArrayList<>();
+    private ArrayList<Items> itemsList = new ArrayList<>();
     private int itemSelected;
     int itemSelectedAmount =1;
     private static final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
+
+    AppDatabase db;
+
 
     //constructor
     public ItemsRecViewAdapter(Context mContext) {
@@ -46,6 +53,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     @NonNull
     @Override
     public ItemsRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        db = AppDatabase.getAppDatabase(parent.getContext());
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.explore_card, parent, false);
         return new ItemsRecViewAdapter.ViewHolder(view);
     }
@@ -58,7 +66,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Double originalPrice = itemsList.get(position).getqPrice();
         Double currentPrice = itemsList.get(position).getdFinalPrice();
 //        String desc = itemsList.get(position).getDesc();
-        String expDate = itemsList.get(position).getdLineDate();
+        LocalDate expDate = itemsList.get(position).getdLineDate();
         int quantity = itemsList.get(position).getqQuantity();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -86,7 +94,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         return itemsList.size();
     }
 
-    public void setItemsList(ArrayList<ItemEntity> itemsList) {
+    public void setItemsList(ArrayList<Items> itemsList) {
         this.itemsList = itemsList;
     }
 
@@ -104,6 +112,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             desc = itemView.findViewById(R.id.desc);
             expDate = itemView.findViewById(R.id.expDate);
             currentPrice = itemView.findViewById(R.id.currentPrice);
+
         }
     }
     public void showDialog(int itemSelected){
@@ -158,16 +167,28 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             }
         });
 
-//        btnAddToCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
-//                MainActivity.cartList.add(itemsList.get(itemSelected));
-//                MainActivity.checkCartCount();
-//                dialog.dismiss();
-//            }
-//        });
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //add to Foodable database
+                CartEntity cartEntity = new CartEntity();
+//                cartEntity.setId(idx);
+                cartEntity.setIpd(itemsList.get(itemSelected).getIpd());
+                cartEntity.setPrice(itemsList.get(itemSelected).getqPrice());
+                cartEntity.setQquantity(itemSelectedAmount);
+                cartEntity.setIvender(itemsList.get(itemSelected).getiVender());
+                cartEntity.setName(itemsList.get(itemSelected).getnName());
+                cartEntity.setExpdate(String.valueOf(itemsList.get(itemSelected).getdLineDate()));
+                cartEntity.setImgURL(itemsList.get(itemSelected).getImgURL());
+                new AddCartTask().execute(cartEntity);
+
+                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
+                MainActivity.cartList.add(itemsList.get(itemSelected));
+                MainActivity.checkCartCount();
+                dialog.dismiss();
+            }
+        });
 
 
         dialog.show();
@@ -177,8 +198,30 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
+//    @Override
+//    public void onPointerCaptureChanged(boolean hasCapture) {
+//        super.onPointerCaptureChanged(hasCapture);
+//    }
 
-    public interface OnItemAddToCartCallBack{
-        void onItemClicked(ItemEntity data);
+    private class AddCartTask extends AsyncTask<CartEntity,Void,Void>
+    {
+        @Override
+        protected Void doInBackground(CartEntity... cartEntities) {
+            db.cartDAO().insert(cartEntities[0]); //ini ambil data yang ke 0
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void unused) {
+            super.onPostExecute(unused);
+            //reset();
+            Toast.makeText(mContext,"Data berhasil diInsert",Toast.LENGTH_LONG).show();
+        }
     }
+
+    public interface OnIntentInteractionListener {
+        void onIntentInteractionListener(CartEntity cart);
+    }
+
+
 }

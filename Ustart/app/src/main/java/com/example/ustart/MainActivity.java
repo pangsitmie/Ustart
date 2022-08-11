@@ -5,14 +5,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,13 +28,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ustart.data.FoodableDatabase;
-import com.example.ustart.data.entity.ItemEntity;
 import com.example.ustart.views.ExploreFragment;
 import com.example.ustart.views.HomeFragment;
 import com.example.ustart.views.MarketFragment;
@@ -46,14 +40,11 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -75,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     String TAG = "response";
 
 
-    private FoodableDatabase database;
+    //private FoodableDatabase database;
 
 
 //    private NavController navController;
@@ -97,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //initialize explore items arraylist
         //getExploreData();
         getDataByType("1");
-        getDataByType("2");
+
+        getCart();
 
 
 
@@ -109,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cartCountCV = findViewById(R.id.cartCountCV);
         cartCount = findViewById(R.id.cartCount);
 //        Initialize database
-        database = FoodableDatabase.getInstance(getApplicationContext());
+        //database = FoodableDatabase.getInstance(getApplicationContext());
 
 
 //        navController = Navigation.findNavController(this, R.id.nav_view);
@@ -158,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         cartCount.setText(String.valueOf(cartList.size()));
         checkCartCount();
     }
+
 
     //DRAWER NAV LISTENER
     @Override
@@ -259,8 +252,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         double qPrice = Double.parseDouble(response.getString("qprice"));
                         int qQuantity = Integer.parseInt(response.getString("qquantity"));
 
-                        ArrayList<Integer> type = new ArrayList<Integer>();
-                        type.add(1);
+                        ArrayList<String> type = new ArrayList<String>();
+                        type.add("1");
                         String iType = response.getString("itype");
                         String iUnit = response.getString("iunit");
 
@@ -272,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                        String dLineDate = response.getString("dlinedate");
                         double dFinalPrice = Double.parseDouble(response.getString("dfinalprice"));
 
-//                        itemsList.add(new Items(ipd, iVender, nName, type, type, qPrice, qQuantity, dFinalPrice, date2, date2, ""));
+                        itemsList.add(new Items(ipd, iVender, nName, type, type, qPrice, qQuantity, dFinalPrice, date2, date2, "", "desc"));
                         Log.d("TAG", ipd + iVender + nName + " " + nName + " " + " " + " " + qPrice + " " + qQuantity + " " + dFinalPrice + " ");
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -294,8 +287,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getDataByType(String iTypeIdx) {
-
-
         String url = URL + "purdSearch";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -326,9 +317,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             LocalDate date2 = LocalDate.of(2022, 7, 6);
                             String dateStr = date2.toString();
 
-                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
-                            database.fooadableDao().insertItemEntity(itemEntity);
-                            //itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
+//                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
+//                            database.fooadableDao().insertItemEntity(itemEntity);
+                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
 
                             Log.d(TAG, "onResponse: "+ipd+nname);
 
@@ -425,8 +416,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String ememo = jsonObject.getString("ememo");
                             Log.d("ememo", ememo);
                             itemsList.get(ii).setDesc(ememo);
-
-
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -443,6 +432,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+    private void getCart() {
+
+    }
+
 
     public static void checkCartCount(){
         if(cartList.size()==0){

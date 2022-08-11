@@ -12,7 +12,7 @@ public class Items {
     double qPrice, dFinalPrice;
     LocalDate dInDate, dLineDate;
 
-    public Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL, String desc) {
+    public  Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL, String desc) {
         this.ipd = ipd;
         this.iVender = iVender;
         this.nName = nName;
