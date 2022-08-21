@@ -20,7 +20,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/nnameET"
+        android:id="@+id/venderNameET"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -41,7 +41,7 @@
             android:id="@+id/quanitityET"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/nnameET"
+            android:layout_below="@+id/venderNameET"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="40dp"

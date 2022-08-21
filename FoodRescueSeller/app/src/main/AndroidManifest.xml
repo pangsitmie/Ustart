@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterVenderActivity"
+            android:exported="false" />
+        <activity
             android:name=".UploadActivity2"
             android:exported="false" />
         <activity

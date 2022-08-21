@@ -29,7 +29,7 @@
 
 
     <EditText
-        android:id="@+id/nnameET"
+        android:id="@+id/venderNameET"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="40dp"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <EditText
-        android:id="@+id/qpriceET"
+        android:id="@+id/picNameET"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="40dp"
@@ -66,15 +66,15 @@
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/nnameET"
+        app:layout_constraintEnd_toEndOf="@+id/venderNameET"
         app:layout_constraintHorizontal_bias="0.185"
-        app:layout_constraintStart_toStartOf="@+id/nnameET"
-        app:layout_constraintTop_toBottomOf="@+id/nnameET" />
+        app:layout_constraintStart_toStartOf="@+id/venderNameET"
+        app:layout_constraintTop_toBottomOf="@+id/venderNameET" />
 
     <!--Email-->
 
     <EditText
-        android:id="@+id/finalPriceET"
+        android:id="@+id/addressET"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginLeft="40dp"
@@ -90,10 +90,10 @@
         android:inputType="number"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/qpriceET"
+        app:layout_constraintEnd_toEndOf="@+id/picNameET"
         app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="@+id/qpriceET"
-        app:layout_constraintTop_toBottomOf="@+id/qpriceET" />
+        app:layout_constraintStart_toStartOf="@+id/picNameET"
+        app:layout_constraintTop_toBottomOf="@+id/picNameET" />
 
 
     <EditText
@@ -113,9 +113,9 @@
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/finalPriceET"
-        app:layout_constraintStart_toStartOf="@+id/finalPriceET"
-        app:layout_constraintTop_toBottomOf="@+id/finalPriceET" />
+        app:layout_constraintEnd_toEndOf="@+id/addressET"
+        app:layout_constraintStart_toStartOf="@+id/addressET"
+        app:layout_constraintTop_toBottomOf="@+id/addressET" />
 
     <TextView
         android:id="@+id/dindateTV"
@@ -175,6 +175,7 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:spinnerMode="dropdown"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/textView2"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView2"

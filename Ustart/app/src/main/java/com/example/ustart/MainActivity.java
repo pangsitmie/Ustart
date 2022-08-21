@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //initialize explore items arraylist
         //getExploreData();
-        getDataByType("1");
+        getDataByType("1", "10", "1");
 
         getCart();
 
@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog.dismiss();
     }
 
-    private void getDataByType(String iTypeIdx) {
+    private void getDataByType(String iTypeIdx, String showPage, String page) {
         String url = URL + "purdSearch";
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -295,20 +295,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
                     for(int i=0;i< jsonArray.length();i++){
                         try {
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            int ipd = Integer.parseInt(jsonObject.getString("ipd")) ;
-                            String ivender = jsonObject.getString("ivender");
-                            String nname = jsonObject.getString("nname");
-                            double qprice = Double.parseDouble(jsonObject.getString("qprice"));
-                            int qquantity = Integer.parseInt(jsonObject.getString("qquantity"));
-                            String itype = jsonObject.getString("itype");
-                            String iunit = jsonObject.getString("iunit");
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            int ipd = Integer.parseInt(jsonObject1.getString("ipd")) ;
+                            String ivender = jsonObject1.getString("ivender");
+                            String nname = jsonObject1.getString("nname");
+                            double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
+                            int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
+                            String itype = jsonObject1.getString("itype");
+                            String iunit = jsonObject1.getString("iunit");
 //                            LocalDate dindate = LocalDate.parse(jsonObject.getString("dindate"));
 //                            LocalDate dlinedate = LocalDate.parse(jsonObject.getString("dlinedate"));
-                            double dfinalprice = Double.parseDouble(jsonObject.getString("dfinalprice"));
+                            double dfinalprice = Double.parseDouble(jsonObject1.getString("dfinalprice"));
 
                             ArrayList<String> typeList = new ArrayList<>(Arrays.asList(itype.split(",")));
                             ArrayList<String> unitList = new ArrayList<>(Arrays.asList(iunit.split(",")));
@@ -341,6 +342,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("itype", iTypeIdx);
+                params.put("showPage", showPage);
+                params.put("page", page);
 
                 return params;
             }

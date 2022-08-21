@@ -59,7 +59,7 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        uidET = view.findViewById(R.id.nnameET);
+        uidET = view.findViewById(R.id.venderNameET);
         passwordET = view.findViewById(R.id.quanitityET);
         btnConfirm = view.findViewById(R.id.btnConfirm);
 

@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -36,15 +37,18 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UploadActivity1 extends AppCompatActivity {
+public class UploadActivity1 extends AppCompatActivity{
     private EditText nnameET, qpriceET, finalPriceET, quanitityET;
     private Spinner itypeSpinner, iunitSpinner;
     private TextView dindateTV, dlinedateTV;
     private String date, UID;
     private Button nextBtn;
+    private String selectedUnitPosition, selectedTypePosition;
 
     private ArrayList<Type> typeArrayList = new ArrayList<>();
     private ArrayList<Unit> unitArrayList = new ArrayList<>();
+    ArrayAdapter<Type> typeArrayAdapter;
+    ArrayAdapter<Unit> unitArrayAdapter;
 
 //    private String[] types = {};
 //    private String[] units = {};
@@ -58,14 +62,15 @@ public class UploadActivity1 extends AppCompatActivity {
 
         UID = SaveSharedPreference.getUID(getApplicationContext());
 
-        nnameET = findViewById(R.id.nnameET);
-        qpriceET = findViewById(R.id.qpriceET);
-        finalPriceET = findViewById(R.id.finalPriceET);
+
+        nnameET = findViewById(R.id.venderNameET);
+        qpriceET = findViewById(R.id.picNameET);
+        finalPriceET = findViewById(R.id.addressET);
         quanitityET = findViewById(R.id.quanitityET);
         dindateTV = findViewById(R.id.dindateTV);
         dlinedateTV = findViewById(R.id.dlinedateTV);
-        itypeSpinner = findViewById(R.id.itypeSpinner);
-        iunitSpinner = findViewById(R.id.iunitSpinner);
+        itypeSpinner = (Spinner) findViewById(R.id.itypeSpinner);
+        iunitSpinner = (Spinner) findViewById(R.id.iunitSpinner);
         nextBtn = findViewById(R.id.btnNext);
 
         dindateTV.setOnClickListener(new View.OnClickListener() {
@@ -139,13 +144,14 @@ public class UploadActivity1 extends AppCompatActivity {
                 String qprice = qpriceET.getText().toString();
                 String finalPrice = finalPriceET.getText().toString();
                 String qquanitity = quanitityET.getText().toString();
-                String itype = itypeSpinner.getSelectedItem().toString();
-                String iunit = iunitSpinner.getSelectedItem().toString();
+//                String uploadType = String.valueOf(selectedTypePosition);
+//                String uploadUnit = String.valueOf(selectedUnitPosition);
                 String dindate = dindateTV.getText().toString();
                 String dlinedateStr = dlinedateTV.getText().toString();
+                //Toast.makeText(getApplicationContext(), selectedTypePosition+" "+selectedUnitPosition, Toast.LENGTH_SHORT).show();
 
-                Log.d("NEXT", UID + nname + qprice + qquanitity + itype + iunit + dindate + dlinedateStr + finalPrice);
-                postPurdData(nname, qprice, qquanitity, itype, iunit, dindate, dlinedateStr, finalPrice);
+                Log.d("NEXT", UID + nname + qprice + qquanitity + selectedTypePosition + selectedUnitPosition + dindate + dlinedateStr + finalPrice);
+                postPurdData(nname, qprice, qquanitity, selectedTypePosition, selectedUnitPosition, dindate, dlinedateStr, finalPrice);
             }
         });
 
@@ -154,21 +160,46 @@ public class UploadActivity1 extends AppCompatActivity {
         getPurdType();
         getPurdUnit();
 
+        typeArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, typeArrayList);
+        typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        itypeSpinner.setAdapter(typeArrayAdapter);
+        itypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //selectedType =  typeArrayList.get(position).getNname();
+                selectedTypePosition = typeArrayList.get(position).getItype();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+
+        unitArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, unitArrayList);
+        unitArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        iunitSpinner.setAdapter(unitArrayAdapter);
+        iunitSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedUnitPosition = unitArrayList.get(position).getIunit();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Log.d("TYPE ARRAY", typeArrayList.toString());
             }
-        }, 2000);
+        }, 1000);
 
-        ArrayAdapter<Type> typeArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, typeArrayList);
-        typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        itypeSpinner.setAdapter(typeArrayAdapter);
 
-        ArrayAdapter<Unit> unitArrayAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, unitArrayList);
-        unitArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        iunitSpinner.setAdapter(unitArrayAdapter);
 
     }
 
@@ -183,8 +214,7 @@ public class UploadActivity1 extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(response);
                     String rid = jsonObject.getString("rid");
                     String message = jsonObject.getString("message");
-
-                    if (rid.equals("1")) {
+                    if (rid.equalsIgnoreCase("1")) {
                         getProductIpd(nname, qprice, qquantity, itype, iunit, dindate, dlinedate, dfinalprice);
                     } else {
                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
@@ -226,10 +256,12 @@ public class UploadActivity1 extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONArray jsonArray = new JSONArray(response);
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
                     for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        String ipd = jsonObject.getString("ipd");
+                        JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                        String ipd = jsonObject1.getString("ipd");
+                        Log.d("IPD", ipd);
                         Toast.makeText(getApplicationContext(), "Continue upload", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), UploadActivity2.class);
                         intent.putExtra("ipd", ipd);
@@ -320,7 +352,9 @@ public class UploadActivity1 extends AppCompatActivity {
                         String ememo = jsonObject.getString("ememo");
 
                         typeArrayList.add(new Type(itype, nname, ememo));
+//                        typeArrayList.add(nname);
                     }
+                    typeArrayAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -350,8 +384,9 @@ public class UploadActivity1 extends AppCompatActivity {
                         String nname = jsonObject.getString("nname");
                         String ememo = jsonObject.getString("ememo");
 
-                        unitArrayList.add(new Unit(iunit, nname, ememo));
+                        unitArrayList.add(new Unit(iunit,nname,ememo));
                     }
+                    unitArrayAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -364,4 +399,6 @@ public class UploadActivity1 extends AppCompatActivity {
         });
         requestQueue.add(stringRequest);
     }
+
+
 }

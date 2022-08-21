@@ -91,6 +91,7 @@ public class RegisterFragment extends Fragment {
         emailET = view.findViewById(R.id.emailET);
         passwordET = view.findViewById(R.id.passwordET);
         passwordConfirmET = view.findViewById(R.id.passwordConfirmET);
+        passwordConfirmET = view.findViewById(R.id.passwordConfirmET);
         dateTV = view.findViewById(R.id.dateTV);
         phoneET = view.findViewById(R.id.phoneET);
 
@@ -149,8 +150,8 @@ public class RegisterFragment extends Fragment {
             //january is 0 december = 11
             public void onDateSet(DatePicker datePicker, int year, int month , int day){
                 month = month+1;
-                date = day + "/" + month +"/" + year;
-                Log.d("DATE CALL", "onDateSet: mm/dd/yyyy" + date);
+                date = year + "-" + month +"-" + day;
+                Log.d("DATE CALL", "onDateSet: yyyy/mm/dd" + date);
                 dateTV.setText(date);
                 uploadDateOfBirth = date;
             }
@@ -246,7 +247,7 @@ public class RegisterFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(),"Sign up error !1"+e,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Sign up error !"+e,Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -259,20 +260,29 @@ public class RegisterFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("uid", uid);
-                params.put("name", name);
-                params.put("email", email);
                 params.put("pwd", pwd);
-                params.put("date", date);
-                params.put("phone", phone);
+                params.put("name", name);
                 params.put("sex", sex);
-
-                params.put("uid", uid);
-                params.put("icode", pwd);
-                params.put("nname", name);
-                params.put("isex", sex);
                 params.put("birthday", date);
-                params.put("ephone", phone);
-                params.put("eemail", email);
+                params.put("phone", phone);
+                params.put("email", email);
+
+
+//                uid:test1
+//                pwd:test12
+//                name:test1
+//                sex:1
+//                birthday:2000-04-04
+//                phone:01234567
+//                email:test1@gmail.com
+
+//                params.put("uid", uid);
+//                params.put("icode", pwd);
+//                params.put("nname", name);
+//                params.put("isex", sex);
+//                params.put("birthday", date);
+//                params.put("ephone", phone);
+//                params.put("eemail", email);
 
                 return params;
             }

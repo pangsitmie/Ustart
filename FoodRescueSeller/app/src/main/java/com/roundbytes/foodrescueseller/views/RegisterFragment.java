@@ -33,6 +33,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.roundbytes.foodrescueseller.MainActivity;
 import com.roundbytes.foodrescueseller.R;
+import com.roundbytes.foodrescueseller.RegisterVenderActivity;
 
 import org.json.JSONObject;
 
@@ -52,7 +53,7 @@ public class RegisterFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private NavController navController;
 
-    final String url = "http://192.168.1.3/ustart/api/signup";
+    public static String URL;
     private String tempSex ="0";
 
 
@@ -70,9 +71,11 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        uidET = view.findViewById(R.id.nnameET);
-        nameET = view.findViewById(R.id.qpriceET);
-        emailET = view.findViewById(R.id.finalPriceET);
+        URL = getString(R.string.API_URL) + "signup";
+
+        uidET = view.findViewById(R.id.venderNameET);
+        nameET = view.findViewById(R.id.picNameET);
+        emailET = view.findViewById(R.id.addressET);
         passwordET = view.findViewById(R.id.quanitityET);
         passwordConfirmET = view.findViewById(R.id.dindateTV);
         dateTV = view.findViewById(R.id.dlinedateTV);
@@ -133,7 +136,7 @@ public class RegisterFragment extends Fragment {
             //january is 0 december = 11
             public void onDateSet(DatePicker datePicker, int year, int month , int day){
                 month = month+1;
-                date = day + "/" + month +"/" + year;
+                date = year + "-" + month +"-" + day;
                 Log.d("DATE CALL", "onDateSet: mm/dd/yyyy" + date);
                 dateTV.setText(date);
                 uploadDateOfBirth = date;
@@ -211,7 +214,7 @@ public class RegisterFragment extends Fragment {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("anyText", response);
@@ -222,7 +225,10 @@ public class RegisterFragment extends Fragment {
 
                     if(rid.equals("1")){
                         Toast.makeText(getContext(), "Sign up success", Toast.LENGTH_SHORT).show();
-                        Intent login = new Intent(getContext(), MainActivity.class);
+                        Intent login = new Intent(getContext(), RegisterVenderActivity.class);
+                        login.putExtra("ivender",uid);
+                        login.putExtra("eemail",email);
+                        login.putExtra("ephone",phone);
                         startActivity(login);
                     }
                     else{
@@ -230,7 +236,7 @@ public class RegisterFragment extends Fragment {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(),"Sign up error !1"+e,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Sign up error !"+e,Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -243,12 +249,12 @@ public class RegisterFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("uid", uid);
-                params.put("name", name);
-                params.put("email", email);
                 params.put("pwd", pwd);
-                params.put("date", date);
-                params.put("phone", phone);
+                params.put("name", name);
                 params.put("sex", sex);
+                params.put("birthday", date);
+                params.put("phone", phone);
+                params.put("email", email);
 
                 return params;
             }
@@ -262,4 +268,5 @@ public class RegisterFragment extends Fragment {
 
         Toast.makeText(getContext(), "Sign up success!", Toast.LENGTH_SHORT).show();
     }
+
 }
