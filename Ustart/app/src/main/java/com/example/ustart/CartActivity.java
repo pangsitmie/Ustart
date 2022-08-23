@@ -21,7 +21,7 @@ public class CartActivity extends AppCompatActivity {
     private TextView itemsTotalTV, taxTV;
 
     private double totalCheckOutPrice = 0;
-    ArrayList<CartEntity> arrCart = new ArrayList<>();
+    ArrayList<Items> arrCart = new ArrayList<>();
     AppDatabase db;
     CartRecViewAdapter adapter;
 
@@ -38,9 +38,9 @@ public class CartActivity extends AppCompatActivity {
         recView = findViewById(R.id.itemsRecView);
         recView.setHasFixedSize(true);
         recView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new CartRecViewAdapter(arrCart);
+        adapter = new CartRecViewAdapter(MainActivity.cartList);
         recView.setAdapter(adapter);
-        new LoadCartTask().execute();
+//        new LoadCartTask().execute();
 
         itemsTotalTV = findViewById(R.id.itemsTotalTV);
         taxTV = findViewById(R.id.taxTV);
@@ -59,20 +59,20 @@ public class CartActivity extends AppCompatActivity {
         return  totalCartValue;
     }
 
-    private class LoadCartTask extends AsyncTask<Void,Void, List<CartEntity>> {
-        @Override
-        protected List<CartEntity> doInBackground(Void... voids) {
-            return db.cartDAO().getAllCart();
-        }
-        @Override
-        protected void onPostExecute(List<CartEntity> cartEntities) { //mahasiswas adalah hasil doInBackground
-            super.onPostExecute(cartEntities);
-            //selesai load data mahasiswa
-            arrCart.clear();
-            arrCart.addAll(cartEntities);
-            adapter.notifyDataSetChanged();
-        }
-    }
+//    private class LoadCartTask extends AsyncTask<Void,Void, List<CartEntity>> {
+//        @Override
+//        protected List<CartEntity> doInBackground(Void... voids) {
+//            return db.cartDAO().getAllCart();
+//        }
+//        @Override
+//        protected void onPostExecute(List<CartEntity> cartEntities) { //mahasiswas adalah hasil doInBackground
+//            super.onPostExecute(cartEntities);
+//            //selesai load data mahasiswa
+//            arrCart.clear();
+//            arrCart.addAll(cartEntities);
+//            adapter.notifyDataSetChanged();
+//        }
+//    }
 
 
 }

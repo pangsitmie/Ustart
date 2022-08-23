@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.adapter.ItemsRecViewAdapter;
@@ -25,7 +35,15 @@ import com.example.ustart.R;
 import com.example.ustart.database.AppDatabase;
 import com.example.ustart.database.entity.CartEntity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ExploreFragment extends Fragment {
     private RecyclerView recView;
@@ -33,8 +51,10 @@ public class ExploreFragment extends Fragment {
     public static ArrayList<Items> items = new ArrayList<Items>();
 
     AppDatabase db;
-    Button addCartBtn;
+    Button addCartBtn, nextBtn, prevBtn;
     int idx =1;
+    int initPage=1;
+    String URL;
 
 
     @Override
@@ -54,7 +74,13 @@ public class ExploreFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        URL = getString(R.string.API_URL);
+        items = MainActivity.itemsList;
+
         addCartBtn = (Button) view.findViewById(R.id.addCart);
+        nextBtn = (Button) view.findViewById(R.id.nextBtn);
+        prevBtn = (Button) view.findViewById(R.id.prevBtn);
+
         db = AppDatabase.getAppDatabase(getActivity());
         recView = view.findViewById(R.id.itemsRecView);
 
@@ -65,7 +91,7 @@ public class ExploreFragment extends Fragment {
 
         for (int i=0;i< MainActivity.itemsList.size();i++)
         {
-            Log.d("explore", MainActivity.itemsList.get(i).getImgURL());
+            Log.d("explore", items.get(i).getImgURL());
         }
 
 
@@ -81,6 +107,49 @@ public class ExploreFragment extends Fragment {
                 cartEntity.setPrice(idx);
                 cartEntity.setQquantity(idx);
                 new AddCartTask().execute(cartEntity);
+            }
+        });
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(initPage==MainActivity.totalPage){
+                    initPage=1;
+                }
+                else{
+                    initPage++;
+                }
+                Log.d("page", initPage+"");
+                getDataByType("1", String.valueOf(MainActivity.showPage), String.valueOf(initPage));
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadItemImg();
+                        loadDesc();
+                    }
+                }, 500);
+
+            }
+        });
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(initPage==1){
+                    initPage=MainActivity.totalPage;
+                }
+                else{
+                    initPage--;
+                }
+                Log.d("page", initPage+"");
+                getDataByType("1", String.valueOf(MainActivity.showPage), String.valueOf(initPage));
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadItemImg();
+                        loadDesc();
+                    }
+                }, 500);
             }
         });
     }
@@ -107,5 +176,158 @@ public class ExploreFragment extends Fragment {
 
     public interface OnIntentInteractionListener {
         void onIntentInteractionListener(CartEntity cart);
+    }
+
+    private void getDataByType(String iTypeIdx, String showPage, String page) {
+        items.clear();
+        String url = URL + "purdSearch";
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    int totalPage =Integer.parseInt(jsonObject.getString("totalPage"));
+                    int dataCount =Integer.parseInt(jsonObject.getString("dataCount"));
+                    JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
+                    for(int i=0;i< jsonArray.length();i++){
+                        try {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            int ipd = Integer.parseInt(jsonObject1.getString("ipd")) ;
+                            String ivender = jsonObject1.getString("ivender");
+                            String nname = jsonObject1.getString("nname");
+                            double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
+                            int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
+                            String itype = jsonObject1.getString("itype");
+                            String iunit = jsonObject1.getString("iunit");
+//                            LocalDate dindate = LocalDate.parse(jsonObject.getString("dindate"));
+//                            LocalDate dlinedate = LocalDate.parse(jsonObject.getString("dlinedate"));
+                            double dfinalprice = Double.parseDouble(jsonObject1.getString("dfinalprice"));
+
+                            ArrayList<String> typeList = new ArrayList<>(Arrays.asList(itype.split(",")));
+                            ArrayList<String> unitList = new ArrayList<>(Arrays.asList(iunit.split(",")));
+
+
+                            LocalDate date2 = LocalDate.of(2022, 7, 6);
+                            String dateStr = date2.toString();
+
+//                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
+//                            database.fooadableDao().insertItemEntity(itemEntity);
+                            items.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
+
+                            Log.d("TAG", "onResponse: "+ipd+nname);
+//                            adapter.notifyDataSetChanged();
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("itype", iTypeIdx);
+                params.put("showPage", showPage);
+                params.put("page", page);
+
+                return params;
+            }
+        };
+
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(postRequest);
+    }
+
+    private void loadItemImg() {
+        for (int idx = 0; idx < items.size(); idx++) {
+            int ipd = items.get(idx).getIpd();
+
+            int ii = idx;
+            String url = URL + "purdPic?ipd=" + ipd;
+            Log.d("IMG", url);
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+//                    Log.d("IMG", response);
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+//                        Log.d(TAG, jsonArray.toString());
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String eurl = jsonObject.getString("eurl");
+                            Log.d("IMG EURL", eurl);
+                            items.get(ii).setImgURL(eurl);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            requestQueue.add(stringRequest);
+        }
+
+    }
+
+    private void loadDesc() {
+        for (int idx = 0; idx < items.size(); idx++) {
+            int ipd = items.get(idx).getIpd();
+
+            int ii = idx;
+            String url = URL + "purdCaption?ipd=" + ipd;
+            Log.d("IMG", url);
+
+            RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+//                    Log.d("IMG", response);
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+//                        Log.d(TAG, jsonArray.toString());
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            String ememo = jsonObject.getString("ememo");
+                            Log.d("ememo", ememo);
+                            items.get(ii).setDesc(ememo);
+                        }
+                        adapter.notifyDataSetChanged();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+            requestQueue.add(stringRequest);
+        }
+
     }
 }

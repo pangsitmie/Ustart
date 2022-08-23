@@ -31,6 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ustart.model.SaveSharedPreference;
 import com.example.ustart.views.ExploreFragment;
 import com.example.ustart.views.HomeFragment;
 import com.example.ustart.views.MarketFragment;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //public ArrayList<String> imgURL= new ArrayList<>();
 
     String TAG = "response";
+    public static int totalPage, dataCount, showPage=5;
 
 
     //private FoodableDatabase database;
@@ -87,9 +89,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //initialize explore items arraylist
         //getExploreData();
-        getDataByType("1", "10", "1");
+        getDataByType("1", String.valueOf(showPage) , "1");
 
-        getCart();
+        getCart(SaveSharedPreference.getUID(getApplicationContext()));
 
 
 
@@ -233,58 +235,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             };
 
-    private void getExploreData() {
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String url = URL + "purdData?ipd=";
-
-
-        for (int i = 1; i <= 2; i++) {
-            //getItemImg(i);
-            //purdData API
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url + i, null, new Response.Listener<JSONObject>() {
-                @RequiresApi(api = Build.VERSION_CODES.O)
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        int ipd = Integer.parseInt(response.getString("ipd"));
-                        String iVender = response.getString("ivender");
-                        String nName = response.getString("nname");
-                        double qPrice = Double.parseDouble(response.getString("qprice"));
-                        int qQuantity = Integer.parseInt(response.getString("qquantity"));
-
-                        ArrayList<String> type = new ArrayList<String>();
-                        type.add("1");
-                        String iType = response.getString("itype");
-                        String iUnit = response.getString("iunit");
-
-//                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-                        LocalDate date2 = LocalDate.of(2022, 7, 6);
-//                        LocalDate dInDate = LocalDate.parse(response.getString("dindate"));
-//                        LocalDate dLineDate = LocalDate.parse(response.getString("dlinedate"));
-//                        String dLineDate = response.getString("dlinedate");
-                        double dFinalPrice = Double.parseDouble(response.getString("dfinalprice"));
-
-                        itemsList.add(new Items(ipd, iVender, nName, type, type, qPrice, qQuantity, dFinalPrice, date2, date2, "", "desc"));
-                        Log.d("TAG", ipd + iVender + nName + " " + nName + " " + " " + " " + qPrice + " " + qQuantity + " " + dFinalPrice + " ");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    //loadingPB.setVisibility(View.GONE);
-                    Toast.makeText(getApplicationContext(), "Failed to get market data", Toast.LENGTH_SHORT).show();
-                }
-            });
-//
-
-
-            requestQueue.add(jsonObjectRequest);
-        }
-        dialog.dismiss();
-    }
 
     private void getDataByType(String iTypeIdx, String showPage, String page) {
         String url = URL + "purdSearch";
@@ -296,6 +246,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
+                    totalPage =Integer.parseInt(jsonObject.getString("totalPage"));
+                    dataCount =Integer.parseInt(jsonObject.getString("dataCount"));
                     JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
                     for(int i=0;i< jsonArray.length();i++){
                         try {
@@ -324,7 +276,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                             Log.d(TAG, "onResponse: "+ipd+nname);
 
-                        } catch (JSONException e) {
+                        }
+
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -436,8 +390,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void getCart() {
+    private void getCart(String iuid) {
+        String url = URL + "purdCar?iuid=" + iuid;
+        Log.d("IMG", url);
 
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i=0;i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        int id = Integer.parseInt(jsonObject.getString("id"));
+                        String iuid = jsonObject.getString("iuid");
+                        int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
+                        String uqprice = jsonObject.getString("uqprice");
+                        String nname = jsonObject.getString("nname");
+                        double qprice = Double.parseDouble(jsonObject.getString("qprice"));
+                        int qquantity = Integer.parseInt(jsonObject.getString("qquantity"));
+
+                        String itype = jsonObject.getString("itype");
+                        ArrayList<String> iTypeList = new ArrayList<String>(Arrays.asList(itype.split(",")));
+                        String ntype = jsonObject.getString("ntype");
+
+                        String iunit = jsonObject.getString("iunit");
+                        ArrayList<String> iUnitList = new ArrayList<String>(Arrays.asList(iunit.split(",")));
+                        String nunit = jsonObject.getString("nunit");
+
+                        String dindate = jsonObject.getString("dindate");
+                        String dlinedate = jsonObject.getString("dlinedate");
+
+                        LocalDate date2 = LocalDate.of(2022, 7, 6);
+                        String dateStr = date2.toString();
+
+                        // TODO: 8/22/2022 harus dapetno ivender e
+                        cartList.add(new Items(id,"ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2,"img url", "desc"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
     }
 
 

@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.ustart.Items;
 import com.example.ustart.R;
 
 import com.example.ustart.database.entity.CartEntity;
@@ -23,10 +24,10 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
 
     private static final String TAG = "CartRecViewAdapter";
     private Context mContext;
-    private ArrayList<CartEntity> data;
+    private ArrayList<Items> data;
 
     //constructor
-    public CartRecViewAdapter(ArrayList<CartEntity> data) {
+    public CartRecViewAdapter(ArrayList<Items> data) {
         this.data = data;
     }
     @NonNull
@@ -38,8 +39,19 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CartRecViewAdapter.ViewHolder holder, int position) {
-        CartEntity cartEntity = data.get(position);
-        holder.bind(cartEntity);
+        String title = data.get(position).getnName();
+        String expDate =String.valueOf(data.get(position).getdLineDate());
+        String price =String.valueOf(data.get(position).getdFinalPrice());
+        String quantity =String.valueOf(data.get(position).getqQuantity());
+        String vender =data.get(position).getiVender();
+        String totalPrice = String.valueOf(data.get(position).getqPrice() * data.get(position).getqQuantity());
+
+        holder.itemTitle.setText(title);
+        holder.expDate.setText(expDate);
+        holder.itemPrice.setText(price);
+        holder.qQuantity.setText(quantity);
+        holder.iVender.setText(vender);
+        holder.totalPrice.setText(totalPrice);
     }
     @Override
     public int getItemCount() {
