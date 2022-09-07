@@ -2,12 +2,15 @@ package com.example.ustart.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +22,37 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
 import com.example.ustart.database.AppDatabase;
 import com.example.ustart.database.entity.CartEntity;
+import com.example.ustart.model.SaveSharedPreference;
 
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapter.ViewHolder> {
 
@@ -40,7 +60,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     private Context mContext;
     private ArrayList<Items> itemsList = new ArrayList<>();
     private int itemSelected;
-    int itemSelectedAmount =1;
+    int itemSelectedAmount = 1;
     private static final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
 
     AppDatabase db;
@@ -50,6 +70,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     public ItemsRecViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
+
     @NonNull
     @Override
     public ItemsRecViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,7 +96,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
         holder.desc.setText(itemsList.get(position).getDesc());
-        holder.currentPrice.setText(currentPrice +" NT");
+        holder.currentPrice.setText(currentPrice + " NT");
         holder.expDate.setText(strDate);
 
 
@@ -83,7 +104,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             @Override
             public void onClick(View view) {
                 itemSelected = holder.getAdapterPosition();
-                Toast.makeText(mContext, itemsList.get(itemSelected).getnName()+" Selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, itemsList.get(itemSelected).getnName() + " Selected", Toast.LENGTH_SHORT).show();
                 showDialog(itemSelected);
             }
         });
@@ -115,7 +136,8 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
         }
     }
-    public void showDialog(int itemSelected){
+
+    public void showDialog(int itemSelected) {
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet_layout);
@@ -123,7 +145,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         ImageView img = dialog.findViewById(R.id.img);
         TextView title = dialog.findViewById(R.id.title);
         TextView desc = dialog.findViewById(R.id.desc);
-        TextView  ivender= dialog.findViewById(R.id.ivender);
+        TextView ivender = dialog.findViewById(R.id.ivender);
         TextView expDate = dialog.findViewById(R.id.expDate);
         TextView originalPrice = dialog.findViewById(R.id.qPrice);
         TextView currentPrice = dialog.findViewById(R.id.currentPrice);
@@ -133,7 +155,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Button btnAddToCart = dialog.findViewById(R.id.btnAddtoCart);
 
         //set
-        itemSelectedAmount=1;
+        itemSelectedAmount = 1;
         title.setText(itemsList.get(itemSelected).getnName());
         desc.setText(itemsList.get(itemSelected).getDesc());
         expDate.setText(itemsList.get(itemSelected).getdLineDate().toString());
@@ -144,7 +166,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Spannable spannable = (Spannable) originalPrice.getText();
         spannable.setSpan(STRIKE_THROUGH_SPAN, 0, oPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        currentPrice.setText( String.valueOf(itemsList.get(itemSelected).getdFinalPrice()));
+        currentPrice.setText(String.valueOf(itemsList.get(itemSelected).getdFinalPrice()));
         amount.setText(String.valueOf(itemSelectedAmount));
         String imgUrl = itemsList.get(itemSelected).getImgURL();
 
@@ -172,20 +194,28 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             public void onClick(View view) {
 
                 //add to Foodable database
-                CartEntity cartEntity = new CartEntity();
-//                cartEntity.setId(idx);
-                cartEntity.setIpd(itemsList.get(itemSelected).getIpd());
-                cartEntity.setPrice(itemsList.get(itemSelected).getqPrice());
-                cartEntity.setQquantity(itemSelectedAmount);
-                cartEntity.setIvender(itemsList.get(itemSelected).getiVender());
-                cartEntity.setName(itemsList.get(itemSelected).getnName());
-                cartEntity.setExpdate(String.valueOf(itemsList.get(itemSelected).getdLineDate()));
-                cartEntity.setImgURL(itemsList.get(itemSelected).getImgURL());
-                new AddCartTask().execute(cartEntity);
+                String iuid = SaveSharedPreference.getUID(mContext);
+                String ipd = String.valueOf(itemsList.get(itemSelected).getIpd());
+                String qquantity = String.valueOf(itemSelectedAmount);
+                Log.d(TAG, iuid+","+ipd+"<"+qquantity);
+                postCart(iuid, ipd, qquantity);
+                dialog.dismiss();
+
+                /*BELOW THIS IS ROOM DB FUNCTION FOR STORING CART IN LOCAL DATABASE*/
+//                CartEntity cartEntity = new CartEntity();
+////                cartEntity.setId(idx);
+//                cartEntity.setIpd(itemsList.get(itemSelected).getIpd());
+//                cartEntity.setPrice(itemsList.get(itemSelected).getqPrice());
+//                cartEntity.setQquantity(itemSelectedAmount);
+//                cartEntity.setIvender(itemsList.get(itemSelected).getiVender());
+//                cartEntity.setName(itemsList.get(itemSelected).getnName());
+//                cartEntity.setExpdate(String.valueOf(itemsList.get(itemSelected).getdLineDate()));
+//                cartEntity.setImgURL(itemsList.get(itemSelected).getImgURL());
+//                new AddCartTask().execute(cartEntity);
 
                 itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
-                MainActivity.cartList.add(itemsList.get(itemSelected));
-                MainActivity.checkCartCount();
+                MainActivity.cartList.add(itemsList.get(itemSelected));//buat ngakalin kalau habis add item lgsg muncul di MainActivity.cartlist
+
                 dialog.dismiss();
             }
         });
@@ -203,8 +233,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 //        super.onPointerCaptureChanged(hasCapture);
 //    }
 
-    private class AddCartTask extends AsyncTask<CartEntity,Void,Void>
-    {
+    private class AddCartTask extends AsyncTask<CartEntity, Void, Void> {
         @Override
         protected Void doInBackground(CartEntity... cartEntities) {
             db.cartDAO().insert(cartEntities[0]); //ini ambil data yang ke 0
@@ -215,7 +244,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             //reset();
-            Toast.makeText(mContext,"Data berhasil diInsert",Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "Data berhasil diInsert", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -223,5 +252,55 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         void onIntentInteractionListener(CartEntity cart);
     }
 
+    private void postCart(String iuid, String ipd, String qquantity) {
+        String url = mContext.getString(R.string.API_URL) + "purdCar";
+        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
 
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String rid = jsonObject.getString("rid");
+                    String message = jsonObject.getString("message");
+
+                    if (rid.equalsIgnoreCase("1")){
+                        Toast.makeText(mContext, "item added to cart", Toast.LENGTH_SHORT).show();
+                        MainActivity.checkCartCount();
+                    }
+                    else
+                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+
+//                    cartList.add(new Items(id, "ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("iuid", iuid);
+                params.put("ipd", ipd);
+                params.put("qquantity", qquantity);
+
+                return params;
+            }
+        };
+
+        postRequest.setRetryPolicy(new
+
+                DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(postRequest);
+    }
 }

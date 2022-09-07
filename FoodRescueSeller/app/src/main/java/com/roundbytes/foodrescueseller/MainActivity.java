@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import com.roundbytes.foodrescueseller.views.ExploreFragment;
+import com.roundbytes.foodrescueseller.views.ProductsFragment;
 import com.roundbytes.foodrescueseller.views.HomeFragment;
 import com.roundbytes.foodrescueseller.views.MarketFragment;
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_products:
-                            selectedFragment = new ExploreFragment();
+                            selectedFragment = new ProductsFragment();
                             getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                             break;
                         case R.id.nav_upload:

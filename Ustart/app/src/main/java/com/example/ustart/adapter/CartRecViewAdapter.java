@@ -27,7 +27,8 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
     private ArrayList<Items> data;
 
     //constructor
-    public CartRecViewAdapter(ArrayList<Items> data) {
+    public CartRecViewAdapter(Context mContext, ArrayList<Items> data) {
+        this.mContext = mContext;
         this.data = data;
     }
     @NonNull
@@ -45,6 +46,7 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
         String quantity =String.valueOf(data.get(position).getqQuantity());
         String vender =data.get(position).getiVender();
         String totalPrice = String.valueOf(data.get(position).getqPrice() * data.get(position).getqQuantity());
+        String imgUrl = data.get(position).getImgURL();
 
         holder.itemTitle.setText(title);
         holder.expDate.setText(expDate);
@@ -52,15 +54,17 @@ public class CartRecViewAdapter extends RecyclerView.Adapter<CartRecViewAdapter.
         holder.qQuantity.setText(quantity);
         holder.iVender.setText(vender);
         holder.totalPrice.setText(totalPrice);
+
+        Glide.with(mContext).load(imgUrl).into(holder.itemImg);
     }
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-//    public void setCartList(ArrayList<CartEntity> cartList) {
-//        this.cartList = cartList;
-//    }
+    public void setCartList(ArrayList<Items> cartList) {
+        data = cartList;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CardView parent;
