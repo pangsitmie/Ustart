@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/exploreFragment"
-        android:name="com.roundbytes.foodrescueseller.views.ExploreFragment"
+        android:name="com.roundbytes.foodrescueseller.views.ProductsFragment"
         android:label="fragment_explore"
         tools:layout="@layout/fragment_explore" >
         <action

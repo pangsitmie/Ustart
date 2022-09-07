@@ -47,11 +47,11 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String imgUrl = itemsList.get(position).getImgURL();
-        String itemTitle = itemsList.get(position).getTitle();
-        Double originalPrice = itemsList.get(position).getOriginalPrice();
-        Double currentPrice = itemsList.get(position).getCurrentPrice();
+        String itemTitle = itemsList.get(position).getnName();
+        Double originalPrice = itemsList.get(position).getqPrice();
+        Double currentPrice = itemsList.get(position).getdFinalPrice();
         String desc = itemsList.get(position).getDesc();
-        LocalDate expDate = itemsList.get(position).getExpDate();
+        LocalDate expDate = itemsList.get(position).getdLineDate();
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String strDate = expDate.toString();
@@ -66,7 +66,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, itemsList.get(holder.getAdapterPosition()).getTitle()+"Clickled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, itemsList.get(holder.getAdapterPosition()).getnName()+"Clickled", Toast.LENGTH_SHORT).show();
                 showDialog();
             }
         });

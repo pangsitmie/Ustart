@@ -8,25 +8,26 @@
 
     <Button
         android:id="@+id/addCart"
-        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/round_square_button"
         android:text="add" />
+
     <Button
         android:id="@+id/prevBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_square_button"
         android:layout_alignParentStart="true"
+        android:background="@drawable/round_square_button"
         android:text="Prev" />
 
     <Button
         android:id="@+id/nextBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_square_button"
         android:layout_alignParentEnd="true"
+        android:background="@drawable/round_square_button"
         android:text="Next" />
 
     <EditText

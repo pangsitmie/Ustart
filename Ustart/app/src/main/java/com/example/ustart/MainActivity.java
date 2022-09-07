@@ -391,7 +391,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getCart(String iuid) {
-        String url = URL + "purdCar?iuid=" + iuid;
+        cartList.clear();
+        String url = getApplicationContext().getString(R.string.API_URL) + "purdCar?iuid=" + iuid;
         Log.d("IMG", url);
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -406,6 +407,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int id = Integer.parseInt(jsonObject.getString("id"));
                         String iuid = jsonObject.getString("iuid");
+                        int ipd =  Integer.parseInt(jsonObject.getString("ipd"));
                         int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
                         String uqprice = jsonObject.getString("uqprice");
                         String nname = jsonObject.getString("nname");
@@ -427,7 +429,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String dateStr = date2.toString();
 
                         // TODO: 8/22/2022 harus dapetno ivender e
-                        cartList.add(new Items(id,"ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2,"img url", "desc"));
+                        cartList.add(new Items(ipd,"ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2,"img url", "desc"));
+                        checkCartCount();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -85,6 +85,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/checkOutBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Check Out"
