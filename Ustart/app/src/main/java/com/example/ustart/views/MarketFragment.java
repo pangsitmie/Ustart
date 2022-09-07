@@ -33,7 +33,7 @@ public class MarketFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recView = view.findViewById(R.id.marketRecView);
+        recView = view.findViewById(R.id.marketRecView);//
 
 
         marketsList.add(new Markets("Carrefour", "https://firebasestorage.googleapis.com/v0/b/ustart-2304.appspot.com/o/carrefour.png?alt=media&token=4a48ee8f-e255-4ce4-a447-37c936ea31ee"));
