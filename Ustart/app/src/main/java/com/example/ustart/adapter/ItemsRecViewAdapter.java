@@ -41,6 +41,11 @@ import com.example.ustart.R;
 import com.example.ustart.database.AppDatabase;
 import com.example.ustart.database.entity.CartEntity;
 import com.example.ustart.model.SaveSharedPreference;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 
 import org.json.JSONArray;
@@ -153,6 +158,16 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         TextView amount = dialog.findViewById(R.id.amount);
         Button btnAddTransaction = dialog.findViewById(R.id.btnAddTransaction);
         Button btnAddToCart = dialog.findViewById(R.id.btnAddtoCart);
+        LineChart lineChart = dialog.findViewById(R.id.lineChart);
+
+        LineDataSet lineDataSet = new LineDataSet(datavalues(), "Data Set");
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(lineDataSet);
+
+        LineData data = new LineData(dataSets);
+        lineChart.setData(data);
+        lineChart.invalidate();
+
 
         //set
         itemSelectedAmount = 1;
@@ -302,5 +317,16 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(postRequest);
+    }
+
+    private ArrayList<Entry> datavalues()
+    {
+        ArrayList<Entry> dataVals = new ArrayList<>();
+        dataVals.add(new Entry(0,20));
+        dataVals.add(new Entry(1,10));
+        dataVals.add(new Entry(2,5));
+        dataVals.add(new Entry(3,2));
+
+        return dataVals;
     }
 }

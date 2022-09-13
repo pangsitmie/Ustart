@@ -10,8 +10,8 @@
     <string name="title_place_holder">Title Place Holder</string>
 
 
-<!--    <string name="API_URL">http://192.168.0.145/ustart/api/</string>-->
-    <string name="API_URL">http://yiproject.online/api/</string>
+    <string name="API_URL">http://192.168.0.145/ustart/api/</string>
+<!--    <string name="API_URL">http://yiproject.online/project/api/</string>-->
 
 
 </resources>

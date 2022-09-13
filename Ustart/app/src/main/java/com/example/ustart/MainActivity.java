@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //getExploreData();
         getDataByType("1", String.valueOf(showPage) , "1");
 
-        getCart(SaveSharedPreference.getUID(getApplicationContext()));
+        //getCart(SaveSharedPreference.getUID(getApplicationContext()));
 
 
 
