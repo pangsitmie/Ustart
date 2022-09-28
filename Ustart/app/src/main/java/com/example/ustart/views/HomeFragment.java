@@ -6,10 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ustart.Items;
+import com.example.ustart.MainActivity;
 import com.example.ustart.R;
 import com.example.ustart.adapter.SwipeAdapter;
 import com.yalantis.library.Koloda;
@@ -20,7 +24,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private SwipeAdapter adapter;
-    private List<Integer> list;
+    public ArrayList<Items> itemsList = new ArrayList<Items>();
     Koloda koloda;
 
     @Override
@@ -40,9 +44,20 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         koloda = view.findViewById(R.id.koloda);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                adapter = new SwipeAdapter(getActivity(), MainActivity.itemsList);
+                koloda.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        }, 2000);
 
-        list = new ArrayList<>();
-        adapter = new SwipeAdapter(getActivity(), list);
-        koloda.setAdapter(adapter);
+        koloda.onClickLeft();
+
+
+
+
     }
 }

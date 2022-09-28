@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -54,6 +56,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -64,6 +67,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
     private static final String TAG = "ItemsRecViewAdapter";
     private Context mContext;
     private ArrayList<Items> itemsList = new ArrayList<>();
+    private LineDataSet lineDataSet;
     private int itemSelected;
     int itemSelectedAmount = 1;
     private static final StrikethroughSpan STRIKE_THROUGH_SPAN = new StrikethroughSpan();
@@ -93,6 +97,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Double currentPrice = itemsList.get(position).getdFinalPrice();
 //        String desc = itemsList.get(position).getDesc();
         LocalDate expDate = itemsList.get(position).getdLineDate();
+        LocalDate inDate = itemsList.get(position).getdInDate();
         int quantity = itemsList.get(position).getqQuantity();
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -106,11 +111,15 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 itemSelected = holder.getAdapterPosition();
                 Toast.makeText(mContext, itemsList.get(itemSelected).getnName() + " Selected", Toast.LENGTH_SHORT).show();
                 showDialog(itemSelected);
+                Log.d("TTT", String.valueOf(expDate));
+                Log.d("TTT", String.valueOf(inDate));
+
             }
         });
     }
@@ -142,6 +151,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void showDialog(int itemSelected) {
         final Dialog dialog = new Dialog(mContext);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -160,13 +170,18 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         Button btnAddToCart = dialog.findViewById(R.id.btnAddtoCart);
         LineChart lineChart = dialog.findViewById(R.id.lineChart);
 
-        LineDataSet lineDataSet = new LineDataSet(datavalues(), "Data Set");
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        lineDataSet = new LineDataSet(datavalues(itemSelected), "Data Set 1");//data set 1 contains price dataset
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();// arraylist of line dataset ex(dataset1, dataset2)
         dataSets.add(lineDataSet);
 
         LineData data = new LineData(dataSets);
         lineChart.setData(data);
         lineChart.invalidate();
+
+// animation entry
+
+
 
 
         //set
@@ -175,17 +190,23 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         desc.setText(itemsList.get(itemSelected).getDesc());
         expDate.setText(itemsList.get(itemSelected).getdLineDate().toString());
         ivender.setText(itemsList.get(itemSelected).getiVender());
-//        originalPrice.setText( );
+        //        originalPrice.setText( );
         String oPrice = String.valueOf(itemsList.get(itemSelected).getqPrice());
         originalPrice.setText((oPrice), TextView.BufferType.SPANNABLE);
         Spannable spannable = (Spannable) originalPrice.getText();
         spannable.setSpan(STRIKE_THROUGH_SPAN, 0, oPrice.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        currentPrice.setText(String.valueOf(itemsList.get(itemSelected).getdFinalPrice()));
+        currentPrice.setText(String.valueOf(itemsList.get(itemSelected).
+
+                getdFinalPrice()));
         amount.setText(String.valueOf(itemSelectedAmount));
         String imgUrl = itemsList.get(itemSelected).getImgURL();
 
-        Glide.with(mContext).load(imgUrl).into(img);
+        Glide.with(mContext).
+
+                load(imgUrl).
+
+                into(img);
 
 
         btnMinTransaction.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +233,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
                 String iuid = SaveSharedPreference.getUID(mContext);
                 String ipd = String.valueOf(itemsList.get(itemSelected).getIpd());
                 String qquantity = String.valueOf(itemSelectedAmount);
-                Log.d(TAG, iuid+","+ipd+"<"+qquantity);
+                Log.d(TAG, iuid + "," + ipd + "<" + qquantity);
                 postCart(iuid, ipd, qquantity);
                 dialog.dismiss();
 
@@ -237,10 +258,18 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
 
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        dialog.getWindow().
+
+                setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().
+
+                setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().
+
+                getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().
+
+                setGravity(Gravity.BOTTOM);
 
     }
 //    @Override
@@ -265,6 +294,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
     public interface OnIntentInteractionListener {
         void onIntentInteractionListener(CartEntity cart);
+
     }
 
     private void postCart(String iuid, String ipd, String qquantity) {
@@ -281,11 +311,10 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
                     String rid = jsonObject.getString("rid");
                     String message = jsonObject.getString("message");
 
-                    if (rid.equalsIgnoreCase("1")){
+                    if (rid.equalsIgnoreCase("1")) {
                         Toast.makeText(mContext, "item added to cart", Toast.LENGTH_SHORT).show();
                         MainActivity.checkCartCount();
-                    }
-                    else
+                    } else
                         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
 
 //                    cartList.add(new Items(id, "ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
@@ -319,14 +348,25 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         requestQueue.add(postRequest);
     }
 
-    private ArrayList<Entry> datavalues()
-    {
-        ArrayList<Entry> dataVals = new ArrayList<>();
-        dataVals.add(new Entry(0,20));
-        dataVals.add(new Entry(1,10));
-        dataVals.add(new Entry(2,5));
-        dataVals.add(new Entry(3,2));
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private ArrayList<Entry> datavalues(int idx) {
 
+
+        double initPrice = itemsList.get(idx).getqPrice();
+        int daysTemp = 4;
+
+        double finalPrice = itemsList.get(idx).getdFinalPrice();
+        double rangePrice = initPrice - finalPrice;
+        double perDayDiscount = rangePrice / daysTemp;
+        Log.d("INITS", initPrice + ", " + finalPrice + ", " + rangePrice + "");
+
+        ArrayList<Entry> dataVals = new ArrayList<>();
+        for (int i = 0; i < daysTemp; i++) {
+            float val = (float) (initPrice - (perDayDiscount * i));
+            dataVals.add(new Entry(i, val));
+
+            Log.d("ENTRIES", i + ", " + val);
+        }
         return dataVals;
     }
 }

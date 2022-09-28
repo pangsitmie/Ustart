@@ -37,6 +37,7 @@
                 android:layout_below="@+id/image">
 
                 <ImageView
+                    android:id="@+id/no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_cross"
@@ -54,6 +55,7 @@
                     app:tint="@color/blue"/>
 
                 <ImageView
+                    android:id="@+id/yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_check"

@@ -42,9 +42,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //public ArrayList<String> imgURL= new ArrayList<>();
 
     String TAG = "response";
-    public static int totalPage, dataCount, showPage=5;
+    public static int totalPage, dataCount, showPage = 5;
 
 
     //private FoodableDatabase database;
@@ -89,11 +93,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //initialize explore items arraylist
         //getExploreData();
-        getDataByType("1", String.valueOf(showPage) , "1");
+        getDataByType("1", String.valueOf(showPage), "1");
 
-        //getCart(SaveSharedPreference.getUID(getApplicationContext()));
-
-
+        getCart(SaveSharedPreference.getUID(getApplicationContext()));
 
 
         toolbar = findViewById(R.id.toolbar);
@@ -246,20 +248,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    totalPage =Integer.parseInt(jsonObject.getString("totalPage"));
-                    dataCount =Integer.parseInt(jsonObject.getString("dataCount"));
+                    totalPage = Integer.parseInt(jsonObject.getString("totalPage"));
+                    dataCount = Integer.parseInt(jsonObject.getString("dataCount"));
                     JSONArray jsonArray = new JSONArray(jsonObject.getString("data"));
-                    for(int i=0;i< jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         try {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            int ipd = Integer.parseInt(jsonObject1.getString("ipd")) ;
+                            Log.d("MAIN", jsonObject1.toString());
+
+
+                            int ipd = Integer.parseInt(jsonObject1.getString("ipd"));
                             String ivender = jsonObject1.getString("ivender");
                             String nname = jsonObject1.getString("nname");
                             double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
                             int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
                             String itype = jsonObject1.getString("itype");
                             String iunit = jsonObject1.getString("iunit");
-//                            LocalDate dindate = LocalDate.parse(jsonObject.getString("dindate"));
+
+
+
+//                            String stamp = jsonObject.getLong("dindDate");
+
+                            Log.d("STAMP", String.valueOf(qquantity));
+
+//                            Date date = new Date(stamp.getTime());
+//                            System.out.println(date);
+
 //                            LocalDate dlinedate = LocalDate.parse(jsonObject.getString("dlinedate"));
                             double dfinalprice = Double.parseDouble(jsonObject1.getString("dfinalprice"));
 
@@ -274,11 +288,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                            database.fooadableDao().insertItemEntity(itemEntity);
                             itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
 
-                            Log.d(TAG, "onResponse: "+ipd+nname);
+                            Log.d(TAG, "onResponse: " + ipd + nname);
 
-                        }
-
-                        catch (JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -291,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -329,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         JSONArray jsonArray = new JSONArray(response);
 //                        Log.d(TAG, jsonArray.toString());
-                        for (int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String eurl = jsonObject.getString("eurl");
                             Log.d("IMG EURL", eurl);
@@ -368,7 +380,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     try {
                         JSONArray jsonArray = new JSONArray(response);
 //                        Log.d(TAG, jsonArray.toString());
-                        for (int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String ememo = jsonObject.getString("ememo");
                             Log.d("ememo", ememo);
@@ -403,11 +415,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i=0;i<jsonArray.length();i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         int id = Integer.parseInt(jsonObject.getString("id"));
                         String iuid = jsonObject.getString("iuid");
-                        int ipd =  Integer.parseInt(jsonObject.getString("ipd"));
+                        int ipd = Integer.parseInt(jsonObject.getString("ipd"));
                         int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
                         String uqprice = jsonObject.getString("uqprice");
                         String nname = jsonObject.getString("nname");
@@ -429,7 +441,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String dateStr = date2.toString();
 
                         // TODO: 8/22/2022 harus dapetno ivender e
-                        cartList.add(new Items(ipd,"ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2,"img url", "desc"));
+                        cartList.add(new Items(ipd, "ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
                         checkCartCount();
                     }
                 } catch (JSONException e) {
@@ -447,11 +459,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    public static void checkCartCount(){
-        if(cartList.size()==0){
+    public static void checkCartCount() {
+        if (cartList.size() == 0) {
             cartCountCV.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             cartCountCV.setVisibility(View.VISIBLE);
             cartCount.setText(String.valueOf(cartList.size()));
         }

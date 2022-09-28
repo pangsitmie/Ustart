@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,10 +20,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ustart.adapter.CartRecViewAdapter;
@@ -39,7 +43,10 @@ import org.json.JSONObject;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 public class CartActivity extends AppCompatActivity {
     private RecyclerView recView;
@@ -50,7 +57,7 @@ public class CartActivity extends AppCompatActivity {
     //AppDatabase db;
     private CartRecViewAdapter adapter;
 
-
+    private JSONArray cartJSONArray = new JSONArray();
 
     //public static ArrayList<Items> items = new ArrayList<Items>();
 
@@ -75,10 +82,19 @@ public class CartActivity extends AppCompatActivity {
         itemsTotalTV = findViewById(R.id.itemsTotalTV);
         taxTV = findViewById(R.id.taxTV);
         checkOutBtn = (Button) findViewById(R.id.checkOutBtn);
+
+
+        getCart();
+
         checkOutBtn.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View v) {
-                getCart();
+                sendRawCart();
+
+                MainActivity.cartList.clear();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -91,11 +107,11 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private double getTotalCheckOutPrice() {
-        double totalCartValue=0;
+        double totalCartValue = 0;
         for (int i = 0; i < MainActivity.cartList.size(); i++) {
             totalCartValue += MainActivity.cartList.get(i).getdFinalPrice() * MainActivity.cartList.get(i).getqQuantity();
         }
-        return  totalCartValue;
+        return totalCartValue;
     }
 
 //    private class LoadCartTask extends AsyncTask<Void,Void, List<CartEntity>> {
@@ -129,7 +145,7 @@ public class CartActivity extends AppCompatActivity {
 //                    Log.d("IMG", response);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
-                        for (int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String eurl = jsonObject.getString("eurl");
                             Log.d("IMG EURL", eurl);
@@ -169,7 +185,7 @@ public class CartActivity extends AppCompatActivity {
                     try {
                         JSONArray jsonArray = new JSONArray(response);
 //                        Log.d(TAG, jsonArray.toString());
-                        for (int i=0;i<jsonArray.length();i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String ememo = jsonObject.getString("ememo");
                             Log.d("ememo", ememo);
@@ -205,6 +221,7 @@ public class CartActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
+                    cartJSONArray = jsonArray;
                     Log.d("CHECHKOUT", jsonArray.toString());
 
 //                    for (int i=0;i<jsonArray.length();i++){
@@ -251,4 +268,105 @@ public class CartActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    private void sendRawCart(){
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        String url =getApplicationContext().getString(R.string.API_URL) + "orderData";
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, cartJSONArray, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("GGG", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("GGG", error.toString());
+            }
+        });
+        requestQueue.add(jsonArrayRequest);
+        Toast.makeText(CartActivity.this, "Order Successful", Toast.LENGTH_SHORT).show();
+    }
+
+//    public void sendRaw() {
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//        String url =getApplicationContext().getString(R.string.API_URL) + "orderData";
+//        Map<String, String> params = new HashMap<String, String>();
+//        String id = null;
+//        String iuid = null;
+//        String ipd = null;
+//        String uqquantity = null;
+//        String uqprice = null;
+//        String nname = null;
+//        String qprice = null;
+//        String qquantity = null;
+//        String itype = null;
+//        String ntype = null;
+//        String iunit = null;
+//        String nunit = null;
+//        String dindate = null;
+//        String dlinedate = null;
+//        for (int i = 0; i < cartJSONArray.length(); i++) {
+//            try {
+//                JSONObject jsonObject = cartJSONArray.getJSONObject(i);
+//                id = jsonObject.getString("id");
+//                iuid = jsonObject.getString("iuid");
+//                ipd = jsonObject.getString("ipd");
+//                uqquantity = jsonObject.getString("uqquantity");
+//                uqprice = jsonObject.getString("uqprice");
+//                nname = jsonObject.getString("nname");
+//                qprice = jsonObject.getString("qprice");
+//                qquantity = jsonObject.getString("qquantity");
+//                itype = jsonObject.getString("itype");
+//                ntype = jsonObject.getString("ntype");
+//                iunit = jsonObject.getString("iunit");
+//                nunit = jsonObject.getString("nunit");
+//                dindate = jsonObject.getString("dindate");
+//
+//
+//                Log.d("GGG", "JSONOBJET: "+id+iuid +ipd+uqquantity);
+//
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        params.put("id", id);
+//        params.put("iuid", iuid);
+//        params.put("ipd", "ipd");
+//        params.put("uqquantity", "1");
+//        params.put("uqprice", "100");
+//        params.put("nname", "bread1");
+//        params.put("qprice", "100");
+//        params.put("qquantity", "10");
+//        params.put("itype", "1");
+//        params.put("ntype", "Bread");
+//        params.put("iunit", "1");
+//        params.put("nunit", "Pack");
+//        params.put("dindate", "1");
+//        params.put("dlinedate", "1");
+//
+//        JSONObject objRegData = new JSONObject(params);
+//        JSONArray jsonArray = new JSONArray();
+//        jsonArray.put(objRegData);
+//        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, url, cartJSONArray, new Response.Listener<JSONArray>() {
+//            @Override
+//            public void onResponse(JSONArray response) {
+//                Log.d("GGG", response.toString());
+//            }
+//
+////            @Override
+////            public Map<String, String> getHeaders() throws AuthFailureError {
+//////                Map<String, String> params = new HashMap<String, String>();
+//////                params.put("Content-Type", "application/json");
+////                return params;
+////            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.d("GGG", error.toString());
+//            }
+//        });
+//        requestQueue.add(jsonArrayRequest);
+//    }
+
 }
