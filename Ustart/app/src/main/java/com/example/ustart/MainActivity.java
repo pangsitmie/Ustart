@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -254,8 +255,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     for (int i = 0; i < jsonArray.length(); i++) {
                         try {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                            Log.d("MAIN", jsonObject1.toString());
-
 
                             int ipd = Integer.parseInt(jsonObject1.getString("ipd"));
                             String ivender = jsonObject1.getString("ivender");
@@ -266,15 +265,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String iunit = jsonObject1.getString("iunit");
 
 
+                            //FIXME: change the date
+                            String dindate_str = jsonObject1.getString("dindate");
+                            String dlinedate_str = jsonObject1.getString("dlinedate");
 
-//                            String stamp = jsonObject.getLong("dindDate");
+                            Date dindate=new SimpleDateFormat("dd/MM/yyyy").parse(dindate_str);
+                            Date dlinedate=new SimpleDateFormat("dd/MM/yyyy").parse(dlinedate_str);
 
-                            Log.d("STAMP", String.valueOf(qquantity));
+                            System.out.println(ipd +" DINDATE: "+dindate_str+"\t\t"+dindate);
+                            System.out.println(ipd+" DLINEDATE"+dlinedate_str+"\t\t"+dlinedate);
 
-//                            Date date = new Date(stamp.getTime());
-//                            System.out.println(date);
-
-//                            LocalDate dlinedate = LocalDate.parse(jsonObject.getString("dlinedate"));
                             double dfinalprice = Double.parseDouble(jsonObject1.getString("dfinalprice"));
 
                             ArrayList<String> typeList = new ArrayList<>(Arrays.asList(itype.split(",")));
@@ -291,6 +291,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Log.d(TAG, "onResponse: " + ipd + nname);
 
                         } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
                             e.printStackTrace();
                         }
                     }
@@ -337,7 +339,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-//                    Log.d("IMG", response);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
 //                        Log.d(TAG, jsonArray.toString());
@@ -376,10 +377,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-//                    Log.d("IMG", response);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
-//                        Log.d(TAG, jsonArray.toString());
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             String ememo = jsonObject.getString("ememo");
