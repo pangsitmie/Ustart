@@ -46,6 +46,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static int totalPage, dataCount, showPage = 5;
 
 
+    //private FoodableDatabase database;
     //private FoodableDatabase database;
 
 
@@ -259,7 +261,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             int ipd = Integer.parseInt(jsonObject1.getString("ipd"));
                             String ivender = jsonObject1.getString("ivender");
                             String nname = jsonObject1.getString("nname");
-                            double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
+                            double qoriginalprice = Double.parseDouble(jsonObject1.getString("qoriginalprice")); //current price that will always be updated
+                            double qprice = Double.parseDouble(jsonObject1.getString("qprice")); //current price that will always be updated
                             int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
                             String itype = jsonObject1.getString("itype");
                             String iunit = jsonObject1.getString("iunit");
@@ -268,12 +271,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             //FIXME: change the date
                             String dindate_str = jsonObject1.getString("dindate");
                             String dlinedate_str = jsonObject1.getString("dlinedate");
+                            dindate_str = dindate_str.replaceAll("\\s.*", "");
+                            dlinedate_str = dlinedate_str.replaceAll("\\s.*", "");
 
-                            Date dindate=new SimpleDateFormat("dd/MM/yyyy").parse(dindate_str);
-                            Date dlinedate=new SimpleDateFormat("dd/MM/yyyy").parse(dlinedate_str);
+//                            Date dindate=new SimpleDateFormat("MM/dd/yyyy").parse(dindate_str);
+//                            Date dlinedate=new SimpleDateFormat("MM/dd/yyyy").parse(dlinedate_str);
+
+
+
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                            LocalDate dindate = LocalDate.parse(dindate_str, formatter);
+                            LocalDate dlinedate = LocalDate.parse(dlinedate_str, formatter);
 
                             System.out.println(ipd +" DINDATE: "+dindate_str+"\t\t"+dindate);
                             System.out.println(ipd+" DLINEDATE"+dlinedate_str+"\t\t"+dlinedate);
+//                            System.out.println(ipd+ "Date"+date+"\n");
 
                             double dfinalprice = Double.parseDouble(jsonObject1.getString("dfinalprice"));
 
@@ -286,13 +298,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
 //                            database.fooadableDao().insertItemEntity(itemEntity);
-                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
-
-                            Log.d(TAG, "onResponse: " + ipd + nname);
+                            itemsList.add(new Items(ipd, ivender, nname, typeList, unitList,qoriginalprice, qprice, qquantity, dfinalprice, dindate, dlinedate, "", ""));
+                            Log.d(TAG, "OOO: " + ipd + nname+ qoriginalprice+qprice+dfinalprice);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
                             e.printStackTrace();
                         }
                     }
@@ -401,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
     private void getCart(String iuid) {
         cartList.clear();
         String url = getApplicationContext().getString(R.string.API_URL) + "purdCar?iuid=" + iuid;
@@ -422,6 +432,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
                         String uqprice = jsonObject.getString("uqprice");
                         String nname = jsonObject.getString("nname");
+                        double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
                         double qprice = Double.parseDouble(jsonObject.getString("qprice"));
                         int qquantity = Integer.parseInt(jsonObject.getString("qquantity"));
 
@@ -440,7 +451,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String dateStr = date2.toString();
 
                         // TODO: 8/22/2022 harus dapetno ivender e
-                        cartList.add(new Items(ipd, "ivender", nname, iTypeList, iUnitList, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
+                        cartList.add(new Items(ipd, "ivender", nname, iTypeList, iUnitList,qoriginalprice, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
                         checkCartCount();
                     }
                 } catch (JSONException e) {

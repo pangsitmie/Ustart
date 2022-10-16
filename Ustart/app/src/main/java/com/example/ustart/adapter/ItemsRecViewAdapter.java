@@ -1,5 +1,7 @@
 package com.example.ustart.adapter;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,6 +39,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.example.ustart.DAO;
 import com.example.ustart.Items;
 import com.example.ustart.MainActivity;
 import com.example.ustart.R;
@@ -98,16 +101,14 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 //        String desc = itemsList.get(position).getDesc();
         LocalDate expDate = itemsList.get(position).getdLineDate();
         LocalDate inDate = itemsList.get(position).getdInDate();
-        int quantity = itemsList.get(position).getqQuantity();
+        int quantity = itemsList.get(position).getqQuantity(); // total available quantitiy
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String strDate = expDate.toString();
 
         Glide.with(mContext).load(imgUrl).into(holder.itemImg);
         holder.itemTitle.setText(itemTitle);
         holder.desc.setText(itemsList.get(position).getDesc());
         holder.currentPrice.setText(currentPrice + " NT");
-        holder.expDate.setText(strDate);
+        holder.expDate.setText(expDate.toString());
 
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +148,6 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             desc = itemView.findViewById(R.id.desc);
             expDate = itemView.findViewById(R.id.expDate);
             currentPrice = itemView.findViewById(R.id.currentPrice);
-
         }
     }
 
@@ -179,10 +179,6 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         lineChart.setData(data);
         lineChart.invalidate();
 
-// animation entry
-
-
-
 
         //set
         itemSelectedAmount = 1;
@@ -212,7 +208,8 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         btnMinTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemSelectedAmount--;
+                if(itemSelectedAmount>1)
+                    itemSelectedAmount--;
                 amount.setText(String.valueOf(itemSelectedAmount));
             }
         });
@@ -220,7 +217,8 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         btnAddTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemSelectedAmount++;
+                if(itemSelectedAmount < itemsList.get(itemSelected).getqQuantity()+1)
+                    itemSelectedAmount++;
                 amount.setText(String.valueOf(itemSelectedAmount));
             }
         });
@@ -235,7 +233,6 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
                 String qquantity = String.valueOf(itemSelectedAmount);
                 Log.d(TAG, iuid + "," + ipd + "<" + qquantity);
                 postCart(iuid, ipd, qquantity);
-                dialog.dismiss();
 
                 /*BELOW THIS IS ROOM DB FUNCTION FOR STORING CART IN LOCAL DATABASE*/
 //                CartEntity cartEntity = new CartEntity();
@@ -249,12 +246,18 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 //                cartEntity.setImgURL(itemsList.get(itemSelected).getImgURL());
 //                new AddCartTask().execute(cartEntity);
 
-                itemsList.get(itemSelected).setqQuantity(itemSelectedAmount);
-                MainActivity.cartList.add(itemsList.get(itemSelected));//buat ngakalin kalau habis add item lgsg muncul di MainActivity.cartlist
-
+                //REFRESH MAIN ACTIVITY CARTLIST
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshCart(iuid);
+                    }
+                }, 1000);
                 dialog.dismiss();
             }
         });
+
 
 
         dialog.show();
@@ -350,18 +353,20 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private ArrayList<Entry> datavalues(int idx) {
-
-
         double initPrice = itemsList.get(idx).getqPrice();
-        int daysTemp = 4;
+        //int daysTemp = 4;
+        LocalDate dindate = itemsList.get(idx).getdInDate();
+        LocalDate dlinedate = itemsList.get(idx).getdLineDate();
+        long daysBetween = DAYS.between(dindate, dlinedate);
+        Log.d(TAG, "DAYS BETWEEN: "+ daysBetween);
 
         double finalPrice = itemsList.get(idx).getdFinalPrice();
         double rangePrice = initPrice - finalPrice;
-        double perDayDiscount = rangePrice / daysTemp;
+        double perDayDiscount = rangePrice / daysBetween;
         Log.d("INITS", initPrice + ", " + finalPrice + ", " + rangePrice + "");
 
         ArrayList<Entry> dataVals = new ArrayList<>();
-        for (int i = 0; i < daysTemp; i++) {
+        for (int i = 0; i < daysBetween; i++) {
             float val = (float) (initPrice - (perDayDiscount * i));
             dataVals.add(new Entry(i, val));
 
@@ -369,4 +374,71 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
         }
         return dataVals;
     }
+
+    private void refreshCart(String iuid)
+    {
+        Log.d(TAG, "NITEM qquantity before" + MainActivity.cartList.get(0).getqQuantity());
+        MainActivity.cartList.clear();
+
+        String url = mContext.getString(R.string.API_URL) + "purdCar?iuid=" + iuid;
+        Log.d("IMG", url);
+
+        RequestQueue requestQueue = Volley.newRequestQueue(mContext);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        int id = Integer.parseInt(jsonObject.getString("id"));
+                        String iuid = jsonObject.getString("iuid");
+                        int ipd = Integer.parseInt(jsonObject.getString("ipd"));
+                        int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
+                        String uqprice = jsonObject.getString("uqprice"); // bought quantity
+                        String nname = jsonObject.getString("nname");
+                        double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
+                        double qprice = Double.parseDouble(jsonObject.getString("qprice"));
+                        int qquantity = Integer.parseInt(jsonObject.getString("qquantity")); //available quantity
+
+                        String itype = jsonObject.getString("itype");
+                        ArrayList<String> iTypeList = new ArrayList<String>(Arrays.asList(itype.split(",")));
+                        String ntype = jsonObject.getString("ntype");
+
+                        String iunit = jsonObject.getString("iunit");
+                        ArrayList<String> iUnitList = new ArrayList<String>(Arrays.asList(iunit.split(",")));
+                        String nunit = jsonObject.getString("nunit");
+
+                        String dindate = jsonObject.getString("dindate");
+                        String dlinedate = jsonObject.getString("dlinedate");
+
+                        LocalDate date2 = LocalDate.of(2022, 7, 6);
+                        String dateStr = date2.toString();
+
+                        // TODO: 8/22/2022 harus dapetno ivender e
+                        Log.d(TAG, "NNNITEM: "+ ipd+ "ivender" +nname+ iTypeList+ iUnitList+ qprice+ uqquantity+ qprice+ date2+ date2+ "img url"+ "desc");
+                        MainActivity.cartList.add(new Items(ipd, "ivender", nname, iTypeList, iUnitList, qoriginalprice, qprice, uqquantity, qprice, date2, date2, "img url", "desc"));
+                        Log.d(TAG, "NNITEM"+MainActivity.cartList.size());
+                        Log.d(TAG, "NITEM qquantityafter" + MainActivity.cartList.get(0).getqQuantity());
+                        MainActivity.checkCartCount();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
+
+        MainActivity.checkCartCount();
+        Log.d(TAG, "MainActivity ccheck caart count"+ MainActivity.cartList.size());
+    }
+
 }

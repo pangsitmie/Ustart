@@ -152,6 +152,9 @@ public class ExploreFragment extends Fragment {
                 }, 500);
             }
         });
+
+        MainActivity.checkCartCount();
+        Log.d("TAG", "MainActivity ccheck caart count"+ MainActivity.cartList.size());
     }
 //    @Override
 //    public void onPointerCaptureChanged(boolean hasCapture) {
@@ -198,6 +201,7 @@ public class ExploreFragment extends Fragment {
                             int ipd = Integer.parseInt(jsonObject1.getString("ipd")) ;
                             String ivender = jsonObject1.getString("ivender");
                             String nname = jsonObject1.getString("nname");
+                            double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
                             double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
                             int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
                             String itype = jsonObject1.getString("itype");
@@ -215,7 +219,7 @@ public class ExploreFragment extends Fragment {
 
 //                            ItemEntity itemEntity = new ItemEntity(ipd, ivender, nname, qprice, qquantity, dfinalprice, dateStr, dateStr, "", "");
 //                            database.fooadableDao().insertItemEntity(itemEntity);
-                            items.add(new Items(ipd, ivender, nname, typeList, unitList, qprice, qquantity, dfinalprice, date2, date2, "", ""));
+                            items.add(new Items(ipd, ivender, nname, typeList, unitList,qoriginalprice, qprice, qquantity, dfinalprice, date2, date2, "", ""));
 
                             Log.d("TAG", "onResponse: "+ipd+nname);
 //                            adapter.notifyDataSetChanged();

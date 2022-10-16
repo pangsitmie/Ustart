@@ -9,15 +9,16 @@ public class Items {
     String iVender, nName, imgURL, desc;
     ArrayList<String> iType = new ArrayList<>();
     ArrayList<String> iUnit = new ArrayList<>();
-    double qPrice, dFinalPrice;
+    double qOriginalPrice, qPrice, dFinalPrice;
     LocalDate dInDate, dLineDate;
 
-    public  Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL, String desc) {
+    public  Items(int ipd, String iVender, String nName, ArrayList<String> iType, ArrayList<String> iUnit,double qOriginalPrice, double qPrice, int qQuantity, double dFinalPrice, LocalDate dInDate, LocalDate dLineDate, String imgURL, String desc) {
         this.ipd = ipd;
         this.iVender = iVender;
         this.nName = nName;
         this.iType = iType;
         this.iUnit = iUnit;
+        this.qOriginalPrice = qOriginalPrice;
         this.qPrice = qPrice;
         this.qQuantity = qQuantity;
         this.dFinalPrice = dFinalPrice;
