@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             String nname = jsonObject1.getString("nname");
                             double qoriginalprice = Double.parseDouble(jsonObject1.getString("qoriginalprice")); //current price that will always be updated
                             double qprice = Double.parseDouble(jsonObject1.getString("qprice")); //current price that will always be updated
-                            int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
+                            int qquantity = Integer.parseInt(jsonObject1.optString("qquantity"));
                             String itype = jsonObject1.getString("itype");
                             String iunit = jsonObject1.getString("iunit");
 
@@ -432,7 +432,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
                         String uqprice = jsonObject.getString("uqprice");
                         String nname = jsonObject.getString("nname");
-                        double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
+                        double qoriginalprice = Double.parseDouble(jsonObject.optString("qoriginalprice")); //current price that will always be updated
                         double qprice = Double.parseDouble(jsonObject.getString("qprice"));
                         int qquantity = Integer.parseInt(jsonObject.getString("qquantity"));
 
