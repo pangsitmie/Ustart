@@ -7,14 +7,6 @@
     android:background="@color/white">
 
     <Button
-        android:id="@+id/addCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/round_square_button"
-        android:text="add" />
-
-    <Button
         android:layout_marginLeft="20dp"
         android:id="@+id/prevBtn"
         android:layout_width="wrap_content"
@@ -36,7 +28,7 @@
         android:id="@+id/idEditSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addCart"
+        android:layout_below="@id/nextBtn"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"

@@ -116,11 +116,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
             @Override
             public void onClick(View view) {
                 itemSelected = holder.getAdapterPosition();
-                Toast.makeText(mContext, itemsList.get(itemSelected).getnName() + " Selected", Toast.LENGTH_SHORT).show();
                 showDialog(itemSelected);
-                Log.d("TTT", String.valueOf(expDate));
-                Log.d("TTT", String.valueOf(inDate));
-
             }
         });
     }
@@ -231,7 +227,6 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
                 String iuid = SaveSharedPreference.getUID(mContext);
                 String ipd = String.valueOf(itemsList.get(itemSelected).getIpd());
                 String qquantity = String.valueOf(itemSelectedAmount);
-                Log.d(TAG, iuid + "," + ipd + "<" + qquantity);
                 postCart(iuid, ipd, qquantity);
 
                 /*BELOW THIS IS ROOM DB FUNCTION FOR STORING CART IN LOCAL DATABASE*/
@@ -377,7 +372,7 @@ public class ItemsRecViewAdapter extends RecyclerView.Adapter<ItemsRecViewAdapte
 
     private void refreshCart(String iuid)
     {
-        Log.d(TAG, "NITEM qquantity before" + MainActivity.cartList.get(0).getqQuantity());
+
         MainActivity.cartList.clear();
 
         String url = mContext.getString(R.string.API_URL) + "purdCar?iuid=" + iuid;

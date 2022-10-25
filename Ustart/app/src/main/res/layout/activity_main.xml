@@ -43,7 +43,7 @@
                     android:layout_alignBottom="@+id/toolbarIcon"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="2dp"
-                    android:text="Food Rescue"
+                    android:text="Foodable"
                     android:textColor="@color/green_4"
                     android:textSize="22sp"
                     android:textStyle="bold" />

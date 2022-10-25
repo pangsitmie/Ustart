@@ -51,7 +51,7 @@ public class ExploreFragment extends Fragment {
     public static ArrayList<Items> items = new ArrayList<Items>();
 
     AppDatabase db;
-    Button addCartBtn, nextBtn, prevBtn;
+    Button nextBtn, prevBtn;
     int idx =1;
     int initPage=1;
     String URL;
@@ -77,7 +77,7 @@ public class ExploreFragment extends Fragment {
         URL = getString(R.string.API_URL);
         items = MainActivity.itemsList;
 
-        addCartBtn = (Button) view.findViewById(R.id.addCart);
+
         nextBtn = (Button) view.findViewById(R.id.nextBtn);
         prevBtn = (Button) view.findViewById(R.id.prevBtn);
 
@@ -98,17 +98,17 @@ public class ExploreFragment extends Fragment {
         recView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recView.setAdapter(adapter);
 
-        addCartBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CartEntity cartEntity = new CartEntity();
-//                cartEntity.setId(idx);
-                cartEntity.setIpd(idx);
-                cartEntity.setPrice(idx);
-                cartEntity.setQquantity(idx);
-                new AddCartTask().execute(cartEntity);
-            }
-        });
+//        addCartBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                CartEntity cartEntity = new CartEntity();
+////                cartEntity.setId(idx);
+//                cartEntity.setIpd(idx);
+//                cartEntity.setPrice(idx);
+//                cartEntity.setQquantity(idx);
+//                new AddCartTask().execute(cartEntity);
+//            }
+//        });
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -201,7 +201,7 @@ public class ExploreFragment extends Fragment {
                             int ipd = Integer.parseInt(jsonObject1.getString("ipd")) ;
                             String ivender = jsonObject1.getString("ivender");
                             String nname = jsonObject1.getString("nname");
-                            double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
+                            double qoriginalprice = Double.parseDouble(jsonObject1.getString("qoriginalprice")); //current price that will always be updated
                             double qprice = Double.parseDouble(jsonObject1.getString("qprice"));
                             int qquantity = Integer.parseInt(jsonObject1.getString("qquantity"));
                             String itype = jsonObject1.getString("itype");
@@ -290,6 +290,10 @@ public class ExploreFragment extends Fragment {
 
                 }
             });
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    15000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(stringRequest);
         }
 
@@ -330,6 +334,10 @@ public class ExploreFragment extends Fragment {
 
                 }
             });
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    15000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(stringRequest);
         }
 

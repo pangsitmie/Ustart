@@ -34,20 +34,22 @@
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_sign_in.xml" value="0.33" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_sign_up.xml" value="0.33" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_sing_in.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_welcome.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/activity_welcome.xml" value="0.2" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.33" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/explore_card.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_explore.xml" value="0.25" />
-        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_market.xml" value="0.1" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_register.xml" value="0.5" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_sign_in.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_welcome.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/item_koloda.xml" value="0.3009833262077811" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/layout/market_card.xml" value="0.33" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/menu/bottom_navigation.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/menu/icons_color.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/menu/main_menu.xml" value="0.5" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/mipmap-anydpi-v26/ic_foodable.xml" value="0.199" />
+        <entry key="..\:/Users/pangsitmie/Documents/GitHub/Ustart/Ustart/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.199" />
       </map>
     </option>
   </component>

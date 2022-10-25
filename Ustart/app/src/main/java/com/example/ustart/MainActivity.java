@@ -368,6 +368,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 }
             });
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    15000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             requestQueue.add(stringRequest);
         }
 
@@ -407,10 +411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
             requestQueue.add(stringRequest);
         }
-
     }
-
-
     private void getCart(String iuid) {
         cartList.clear();
         String url = getApplicationContext().getString(R.string.API_URL) + "purdCar?iuid=" + iuid;
@@ -432,8 +433,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         int uqquantity = Integer.parseInt(jsonObject.getString("uqquantity"));
                         String uqprice = jsonObject.getString("uqprice");
                         String nname = jsonObject.getString("nname");
-                        double qoriginalprice = Double.parseDouble(jsonObject.optString("qoriginalprice")); //current price that will always be updated
-                        double qprice = Double.parseDouble(jsonObject.getString("qprice"));
+                        double qoriginalprice = Double.parseDouble(jsonObject.getString("qoriginalprice")); //current price that will always be updated
+                        double qprice = Double.parseDouble(jsonObject.getString("qprice")); //current price that will always be updated
                         int qquantity = Integer.parseInt(jsonObject.getString("qquantity"));
 
                         String itype = jsonObject.getString("itype");
@@ -465,6 +466,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         });
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                15000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         requestQueue.add(stringRequest);
     }
 

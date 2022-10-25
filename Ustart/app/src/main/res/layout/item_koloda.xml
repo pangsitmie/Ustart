@@ -25,6 +25,7 @@
                 android:layout_height="450dp"
                 android:backgroundTint="@color/white"
                 android:scaleType="fitXY"
+                app:strokeColor="@null"
                 app:shapeAppearanceOverlay="@style/Shape"
                 app:srcCompat="@drawable/bread" />
 
