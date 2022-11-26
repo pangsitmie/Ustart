@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "104289188611",
+    "firebase_url": "https://ustart-2304-default-rtdb.firebaseio.com",
+    "project_id": "ustart-2304",
+    "storage_bucket": "ustart-2304.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104289188611:android:5360ed587ba60b42f40736",
+        "android_client_info": {
+          "package_name": "com.roundbytes.fooable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104289188611-fkaahpea5c254eu0g3gqkattcm5ardp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzCw1UEyT-pq1S19pAIR-q2FP-oQQqhEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104289188611-fkaahpea5c254eu0g3gqkattcm5ardp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104289188611:android:64eccb1dedb7dc0df40736",
+        "android_client_info": {
+          "package_name": "com.roundbytes.foodrescueseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104289188611-fkaahpea5c254eu0g3gqkattcm5ardp8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzCw1UEyT-pq1S19pAIR-q2FP-oQQqhEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104289188611-fkaahpea5c254eu0g3gqkattcm5ardp8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

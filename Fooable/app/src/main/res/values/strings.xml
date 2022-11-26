@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">Foodable</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cover" />
+    <string name="title_place_holder">Title Place Holder</string>
+
+
+<!--    <string name="API_URL">http://192.168.0.145/ustart/api/</string>-->
+    <string name="API_URL">http://yiproject.online/project/api/</string>
+
+
+</resources>

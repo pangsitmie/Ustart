@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome_bg"
+    tools:context="com.roundbytes.fooable.views.WelcomeFragment">
+
+    <ImageView
+        android:id="@+id/shoppingIV"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/foodable_logo" />
+
+
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shoppingIV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Save the world is now cheaper"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+<!--    <Button-->
+<!--        android:id="@+id/shopBtn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@+id/registerTV"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginLeft="80dp"-->
+<!--        android:layout_marginRight="80dp"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:background="@drawable/round_button"-->
+<!--        android:minHeight="55dp"-->
+<!--        android:text="Start Shopping"-->
+<!--        android:textColor="@color/purple"-->
+<!--        android:textStyle="bold" />-->
+
+    <Button
+        android:id="@+id/registerTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_button"
+        android:backgroundTint="@color/green_4"
+        android:minHeight="55dp"
+        android:text="sign up"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/singInTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="Already have an account?"
+        android:textAlignment="textStart"
+        android:textColor="@color/green_2"
+        android:textSize="14dp" />
+
+    <TextView
+        android:id="@+id/singInTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="30dp"
+        android:text="Sign In"
+        android:textAlignment="textStart"
+        android:textColor="@color/green_4"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

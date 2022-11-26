@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.roundbytes.fooable.views.MarketFragment"
+    android:background="@color/white">
+
+    <Button
+        android:layout_marginLeft="20dp"
+        android:id="@+id/prevBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/round_square_button"
+        android:text="Prev" />
+
+    <Button
+        android:layout_marginRight="20dp"
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/round_square_button"
+        android:text="Next" />
+
+    <EditText
+        android:id="@+id/idEditSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nextBtn"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/round_button"
+        android:backgroundTint="@color/white_grey"
+        android:hint="Search..."
+        android:inputType="textCapCharacters"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/secondary_color"
+        android:textColorHint="@color/gray"
+        android:textSize="14sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemsRecView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/idEditSearch"
+        android:layout_margin="10dp" />
+
+
+</RelativeLayout>
